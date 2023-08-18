@@ -5,7 +5,7 @@
       <div class="count">12</div>
     </RouterLink>
     <RouterLink to="/import" class="nav__link">Импорт</RouterLink>
-    <button class="nav__link header__addObject">
+    <button class="nav__link header__addObject" @click="emits('changeOpen')">
       <svg
         width="22"
         height="22"
@@ -27,7 +27,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const emits = defineEmits<{
+  (e: "changeOpen"): void;
+}>();
+</script>
 
 <style scoped lang="scss">
 .header__nav {

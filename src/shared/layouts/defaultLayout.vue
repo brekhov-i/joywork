@@ -5,7 +5,7 @@
         <div class="header__title">Жилые комплексы</div>
       </div>
       <div class="header__bottom">
-        <header-nav />
+        <header-nav @changeOpen="emits('changeOpen')" />
         <header-type-grid />
       </div>
     </header>
@@ -31,6 +31,10 @@
 <script setup lang="ts">
 import HeaderNav from "@/widgets/header/header-nav.vue";
 import HeaderTypeGrid from "@/widgets/header/header-type-grid.vue";
+
+const emits = defineEmits<{
+  (e: "changeOpen"): void;
+}>();
 </script>
 
 <style lang="scss">

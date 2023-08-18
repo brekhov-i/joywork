@@ -20,7 +20,7 @@ export type TUniqueOffer = {
 };
 
 export type TComplex = {
-  _id: string;
+  _id?: string;
   idDomClick: string;
   type: TTypeObject;
   country: TCountry;
@@ -45,4 +45,16 @@ export type TComplex = {
   image: string;
   stocks?: string;
   queue?: string;
+};
+
+export type TComplexNew = {
+  _id?: string;
+  type: string;
+  idDomClick: string;
+  country: string;
+  region: string;
+  address: string;
+  metro: string;
+  title: string;
+  uniqueOffer: TUniqueOffer[];
 };

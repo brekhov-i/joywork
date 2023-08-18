@@ -29,7 +29,7 @@ import ComplexItem from "@/entities/complexItem.vue";
 import { storeToRefs } from "pinia";
 
 const objectStore = useComplexStore();
-const { typeView, complexArr } = storeToRefs(objectStore);
+const { typeView } = storeToRefs(objectStore);
 </script>
 
 <style scoped lang="scss">
