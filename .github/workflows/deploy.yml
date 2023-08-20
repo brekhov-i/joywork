@@ -2,12 +2,12 @@ name: Deploy
 
 on:
   push:
-    branches:
-      - master
+    branches: ["master"]
 
 jobs:
   deploy:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - run: npm ci
       - run: npm run build
