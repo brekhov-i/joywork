@@ -33,7 +33,10 @@
             </svg>
           </div>
         </div>
-        <RouterLink to="/" class="complexItem__title">
+        <RouterLink
+          :to="`/complex/${'hbshbfhsfds'}`"
+          class="complexItem__title"
+        >
           Тестовый ЖК Невский
         </RouterLink>
       </div>

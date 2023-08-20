@@ -24,6 +24,7 @@ export type TComplex = {
   idDomClick: string;
   type: TTypeObject;
   country: TCountry;
+  region: string;
   adress: string;
   metro: TMetro;
   timeToMetro: {

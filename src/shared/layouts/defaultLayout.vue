@@ -91,7 +91,6 @@ const emits = defineEmits<{
   main {
     width: 100%;
     height: 100%;
-    background-color: #ffffff;
     overflow-y: scroll;
   }
 }

@@ -15,6 +15,7 @@ export const useComplexStore = defineStore("object", () => {
         time: 1692218533314,
         typeToMetro: { onFoot: "Пешком" },
       },
+      region: "Московская область",
       title: "Тестовый ЖК Невский",
       mainDescription: {
         title: "Заголовок описания",
@@ -34,10 +35,15 @@ export const useComplexStore = defineStore("object", () => {
     typeView.value = type;
   };
 
+  const getComplexById = (id: string): TComplex | undefined => {
+    return complexArr.value.find((el) => el._id === id);
+  };
+
   return {
     complexArr,
     typeView,
     arrTypes,
     changeTypeView,
+    getComplexById,
   };
 });
