@@ -44,7 +44,7 @@ const emits = defineEmits<{
   display: grid;
   grid-template-columns: 110px 1fr;
   grid-template-rows: 139px 1fr;
-  grid-row-gap: 30px;
+  // grid-row-gap: 30px;
   background-color: #f3f3f3;
   .header {
     width: 100%;
@@ -56,6 +56,13 @@ const emits = defineEmits<{
     &__top {
       width: 100%;
       height: 74px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-left: 35px;
+    }
+    &__title {
+      font-size: 32px;
     }
     &__bottom {
       width: 100%;
@@ -92,6 +99,7 @@ const emits = defineEmits<{
     width: 100%;
     height: 100%;
     overflow-y: scroll;
+    padding: 30px;
   }
 }
 </style>

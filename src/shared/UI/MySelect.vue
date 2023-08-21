@@ -1,6 +1,10 @@
 <template>
-  <div class="mySelect" ref="selectRef">
-    <label class="mySelect__label">{{ label }}</label>
+  <div
+    class="mySelect"
+    :class="withLabel ? 'mySelect--withLabel' : ''"
+    ref="selectRef"
+  >
+    <label class="mySelect__label" v-if="withLabel">{{ label }}</label>
     <div class="mySelect__field">
       <div class="field__active" @click="showList = !showList">
         <template v-if="multiSelect">
@@ -66,11 +70,13 @@ import { ref } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    label: string;
+    label?: string;
     multiSelect?: boolean;
+    withLabel?: boolean;
   }>(),
   {
     multiSelect: false,
+    withLabel: true,
   }
 );
 
@@ -102,9 +108,13 @@ document.addEventListener("click", (e: Event) => {
   width: 100%;
   height: auto;
   display: grid;
-  grid-template-columns: 1fr 468px;
+  grid-template-columns: 1fr;
   grid-column-gap: 30px;
   align-items: center;
+
+  &.mySelect--withLabel {
+    grid-template-columns: 1fr 468px;
+  }
 
   &__label {
     @apply text-grey-900;

@@ -1,5 +1,5 @@
 <template>
-  <div class="complexItem">
+  <RouterLink :to="`/complex/${'hbshbfhsfds'}`" class="complexItem">
     <div class="complexItem__image">
       <img
         :src="require('@/shared/assets/images/complexes/complex1.png')"
@@ -33,12 +33,7 @@
             </svg>
           </div>
         </div>
-        <RouterLink
-          :to="`/complex/${'hbshbfhsfds'}`"
-          class="complexItem__title"
-        >
-          Тестовый ЖК Невский
-        </RouterLink>
+        <div class="complexItem__title">Тестовый ЖК Невский</div>
       </div>
       <div class="complexItem__location">
         <div class="complexItem__metro">
@@ -78,7 +73,7 @@
         </RouterLink>
       </div>
     </div>
-  </div>
+  </RouterLink>
 </template>
 
 <script setup lang="ts">

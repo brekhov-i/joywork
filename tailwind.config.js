@@ -18,6 +18,7 @@ module.exports = {
         400: "#DEDEDE",
         900: "#757575",
       },
+      red: "#EC2E2E",
     },
     fontFamily: {
       sans: ["Lato, sans-serif"],

@@ -3,14 +3,17 @@
     <label :for="nameField" class="myInput__label" v-if="withLabel">{{
       label
     }}</label>
-    <input
-      type="text"
-      :name="nameField"
-      class="myInput__field"
-      @input="inputValue($event)"
-      :placeholder="placeholder"
-      :value="modelValue"
-    />
+    <div class="myInput__content">
+      <input
+        type="text"
+        :name="nameField"
+        class="myInput__field"
+        @input="inputValue($event)"
+        :placeholder="placeholder"
+        :value="modelValue"
+      />
+      <div class="myInput__after" v-if="afterInput">{{ afterInput }}</div>
+    </div>
   </div>
 </template>
 
@@ -22,6 +25,7 @@ withDefaults(
     modelValue: string;
     placeholder: string;
     withLabel?: boolean;
+    afterInput?: string;
   }>(),
   {
     withLabel: true,
@@ -54,6 +58,17 @@ const inputValue = (e: Event) => {
     @apply text-grey-900;
     font-size: 14px;
     line-height: 100%;
+  }
+  &__content {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    @apply text-grey-900;
+  }
+  &__after {
+    margin-left: 16px;
   }
   &__field {
     width: 100%;

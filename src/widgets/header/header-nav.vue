@@ -40,7 +40,7 @@ const emits = defineEmits<{
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  column-gap: 52px;
+  column-gap: 50px;
   .nav__link {
     position: relative;
     width: auto;
@@ -68,6 +68,12 @@ const emits = defineEmits<{
       line-height: 100%;
       font-style: normal;
       font-weight: 700;
+    }
+    &.header__addObject {
+      svg {
+        position: absolute;
+        left: -28px;
+      }
     }
   }
   a.nav__link {
