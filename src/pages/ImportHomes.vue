@@ -18,7 +18,7 @@ import FieldStep from "@/widgets/importSteps/fieldStep.vue";
 import defaultLayout from "@/shared/layouts/defaultLayout.vue";
 import { ref } from "vue";
 
-const activeItem = ref<number>(1);
+const activeItem = ref<number>(0);
 const stepItems = ref<TStepItem[]>([
   {
     id: 0,
