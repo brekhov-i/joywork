@@ -31,5 +31,13 @@ defineProps<{
     @apply border-grey-400;
     padding: 8px;
   }
+
+  &:disabled {
+    @apply bg-grey-400;
+    @apply border;
+    @apply border-grey-900;
+    @apply text-grey-900;
+    cursor: default;
+  }
 }
 </style>

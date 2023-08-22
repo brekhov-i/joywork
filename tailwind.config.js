@@ -19,9 +19,19 @@ module.exports = {
         900: "#757575",
       },
       red: "#EC2E2E",
+      blue: {
+        DEFAULT: "#3A8EFA",
+        100: "#F1F6FF",
+        500: "#D4E3FD",
+      },
     },
     fontFamily: {
       sans: ["Lato, sans-serif"],
+    },
+    extend: {
+      margin: {
+        7.5: "30px",
+      },
     },
   },
   plugins: [],

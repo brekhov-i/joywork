@@ -7,6 +7,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/pages/HomePage.vue"),
   },
   {
+    path: "/import",
+    name: "import",
+    component: () => import("@/pages/ImportHomes.vue"),
+  },
+  {
     path: "/complex/:id",
     name: "complex",
     component: () => import("@/pages/ComplexPage.vue"),
