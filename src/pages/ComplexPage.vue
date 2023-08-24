@@ -119,31 +119,15 @@
 </template>
 
 <script setup lang="ts">
-import { useComplexStore } from "@/app/store/complex";
 import { TComplex } from "@/app/types/complex";
 import MyButton from "@/shared/UI/MyButton.vue";
 import DefaultLayout from "@/shared/layouts/defaultLayout.vue";
 import FormAddHome from "@/widgets/forms/formAddHome.vue";
 import ListHome from "@/widgets/listHome.vue";
-import { onMounted, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
-
-const route = useRoute();
-const router = useRouter();
-const { getComplexById } = useComplexStore();
+import { ref } from "vue";
 const complexData = ref<TComplex>();
 
 const isOpenForm = ref<boolean>(false);
-
-onMounted(() => {
-  const id: string = route.params.id as string;
-  const complex = getComplexById(id);
-  if (complex) {
-    complexData.value = complex;
-  } else {
-    router.push("/");
-  }
-});
 </script>
 
 <style lang="scss">

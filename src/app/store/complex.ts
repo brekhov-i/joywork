@@ -1,49 +1,28 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { TComplex, TTypeGrid } from "../types/complex";
+
+enum TypesGrid {
+  LIST = "list",
+  TILE = "tile",
+  TABLE = "table",
+}
 
 export const useComplexStore = defineStore("object", () => {
-  const complexArr = ref<TComplex[]>([
-    {
-      _id: "hbshbfhsfds",
-      idDomClick: "6426372874",
-      type: { newBuild: "Жилой комплекс в новостройке" },
-      country: { ru: "Россия" },
-      adress: "",
-      metro: { politech: "Политехническая" },
-      timeToMetro: {
-        time: 1692218533314,
-        typeToMetro: { onFoot: "Пешком" },
-      },
-      region: "Московская область",
-      title: "Тестовый ЖК Невский",
-      mainDescription: {
-        title: "Заголовок описания",
-        text: "Текст описания",
-      },
-      image: "",
-    },
-  ]);
-  const typeView = ref<string>("tile");
-  const arrTypes = ref<TTypeGrid>({
-    list: "Список",
-    tile: "Плитка",
-    table: "Таблица",
+  const activeType = ref<string>("list");
+
+  const types = ref<Record<TypesGrid, string>>({
+    [TypesGrid.LIST]: "Список",
+    [TypesGrid.TILE]: "Плитка",
+    [TypesGrid.TABLE]: "Таблица",
   });
 
-  const changeTypeView = (type: string): void => {
-    typeView.value = type;
-  };
-
-  const getComplexById = (id: string): TComplex | undefined => {
-    return complexArr.value.find((el) => el._id === id);
+  const changeActiveType = (type: string) => {
+    activeType.value = type;
   };
 
   return {
-    complexArr,
-    typeView,
-    arrTypes,
-    changeTypeView,
-    getComplexById,
+    activeType,
+    types,
+    changeActiveType,
   };
 });

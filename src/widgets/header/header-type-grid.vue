@@ -1,13 +1,18 @@
 <template>
   <div class="typeGrid">
     <button
-      v-for="(type, index) in arrTypes"
-      :key="index"
-      :class="['typeGrid__btn', typeView === index ? 'active' : '']"
-      @click="changeTypeView(index)"
+      v-for="(type, typeIndex) in types"
+      :key="typeIndex"
+      :class="['typeGrid__btn', typeIndex === activeType ? 'active' : '']"
+      @click="
+        () => {
+          changeActiveType(typeIndex);
+          activeType = typeIndex;
+        }
+      "
     >
       <img
-        :src="require(`@/shared/assets/icons/typeNav/${index}.svg`)"
+        :src="require(`@/shared/assets/icons/typeNav/${typeIndex}.svg`)"
         :alt="type"
       />
       <div class="text">{{ type }}</div>
@@ -16,12 +21,11 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
 import { useComplexStore } from "@/app/store/complex";
+import { storeToRefs } from "pinia";
 
-const objectStore = useComplexStore();
-const { changeTypeView } = useComplexStore();
-const { typeView, arrTypes } = storeToRefs(objectStore);
+const { changeActiveType } = useComplexStore();
+const { activeType, types } = storeToRefs(useComplexStore());
 </script>
 
 <style scoped lang="scss">

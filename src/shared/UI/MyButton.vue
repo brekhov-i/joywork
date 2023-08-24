@@ -26,7 +26,8 @@ defineProps<{
   }
 
   &.grey-icon {
-    @apply bg-grey-200;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #fefefe 0%, #f6f6f6 100%);
     @apply border;
     @apply border-grey-400;
     padding: 8px;

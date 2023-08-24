@@ -93,7 +93,7 @@ const change = computed<string>(() => {
   width: 100%;
   height: max-content;
   display: grid;
-  grid-template-columns: vw(450, 1920) 1fr;
+  grid-template-columns: vw(300, 1920) 1fr;
   @apply bg-white;
 
   &.medium {
@@ -162,16 +162,15 @@ const change = computed<string>(() => {
 
   &__content {
     display: grid;
-    grid-template-columns: 1fr 492px;
+    grid-template-columns: 1fr;
   }
   &__head {
     width: 100%;
     height: auto;
     grid-row: 1;
-    grid-column: span 2;
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: flex-start;
     padding: 30px;
     border-bottom: 1px solid;
@@ -196,19 +195,19 @@ const change = computed<string>(() => {
   }
 
   &__nav {
-    width: auto;
+    width: 100%;
     height: auto;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-left: auto;
+    margin-bottom: 15px;
   }
 
   &__develop {
     @apply text-grey-900;
     font-size: 15px;
     line-height: 100%;
-    margin-right: 30px;
+    margin-right: auto;
   }
 
   &__btnMenu {
@@ -247,8 +246,8 @@ const change = computed<string>(() => {
   }
   &__change {
     width: 100%;
-    grid-row: 2;
-    grid-column: 2;
+    grid-row: 3;
+    grid-column: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -260,8 +259,7 @@ const change = computed<string>(() => {
     font-size: 15px;
   }
   &__advertisement {
-    grid-row: 3;
-    grid-column: span 2;
+    grid-row: 4;
     padding: 18px 30px;
     border-bottom: 1px solid;
     @apply border-grey;
@@ -288,8 +286,7 @@ const change = computed<string>(() => {
     }
   }
   &__counts {
-    grid-row: 4;
-    grid-column: span 2;
+    grid-row: 5;
     padding: 18px 30px;
     display: flex;
     justify-content: flex-start;
@@ -312,7 +309,7 @@ const change = computed<string>(() => {
     width: 100%;
     height: max-content;
     display: grid;
-    grid-template-columns: vw(450, 1440) 1fr;
+    grid-template-columns: vw(300, 1440) 1fr;
     @apply bg-white;
 
     &.medium {
@@ -362,7 +359,7 @@ const change = computed<string>(() => {
 
     &__content {
       display: grid;
-      grid-template-columns: 1fr vw(340, 1440);
+      grid-template-columns: 1fr;
     }
     &__head {
       padding: 26px;
@@ -374,9 +371,12 @@ const change = computed<string>(() => {
       font-size: 24px;
     }
 
+    &__nav {
+      margin-bottom: 30px;
+    }
+
     &__develop {
       font-size: 14px;
-      margin-right: 26px;
     }
 
     &__location {
@@ -385,6 +385,9 @@ const change = computed<string>(() => {
     &__metro {
       column-gap: 8px;
       margin-bottom: 18px;
+      flex-wrap: wrap;
+      flex-direction: row;
+      align-items: flex-start;
     }
     &__change {
       padding: 16px 25px;

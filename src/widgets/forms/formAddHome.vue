@@ -174,7 +174,7 @@
             />
             <Textarea placeholder="Описание" autoResize class="w-full" />
             <div class="item__btns">
-              <MyButton class="item__save" :theme="'green'">
+              <MyButton class="item__save" :theme="'green'" @click.prevent>
                 <svg
                   width="18"
                   height="18"
@@ -189,7 +189,11 @@
                 </svg>
                 Сохранить
               </MyButton>
-              <MyButton :theme="'grey-icon'" class="item__delete">
+              <MyButton
+                :theme="'grey-icon'"
+                class="item__delete"
+                @click.prevent
+              >
                 <svg
                   width="18"
                   height="18"
@@ -204,7 +208,7 @@
                 </svg>
               </MyButton>
             </div>
-            <MyButton class="item__delete text-sm">
+            <MyButton class="item__delete text-sm" @click.prevent>
               <svg
                 width="18"
                 height="18"

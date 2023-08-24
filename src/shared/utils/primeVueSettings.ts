@@ -17,7 +17,7 @@ export default {
             "border border-grey-400 rounded h-9 py-2 px-4",
             "focus:!shadow-none focus:!border-green hover:!border-green",
             context.disabled
-              ? "focus:!border-grey-400 hover:!border-grey-400 !bg-[#F2F3F3]"
+              ? "focus:!border-grey-400 hover:!border-grey-400 bg-[#F2F3F3]"
               : "",
           ],
         };

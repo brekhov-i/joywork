@@ -1,5 +1,5 @@
 <template>
-  <div class="homeItem">
+  <RouterLink to="/home/2409fjd/main" class="homeItem">
     <div class="homeItem__image">
       <img :src="require('@/shared/assets/images/homes/home1.png')" alt="" />
     </div>
@@ -66,7 +66,7 @@
         </svg>
       </button>
     </div>
-  </div>
+  </RouterLink>
 </template>
 
 <script setup lang="ts"></script>

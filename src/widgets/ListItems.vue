@@ -1,23 +1,21 @@
 <template>
-  <div :class="['listItems', `listItems--${typeView}`]">
+  <div :class="['listItems', `listItems--${activeType}`]">
     <ComplexItem
       :class="[
-        typeView === 'tile' ? 'medium' : typeView === 'table' ? 'small' : '',
+        activeType === 'tile'
+          ? 'medium'
+          : activeType === 'table'
+          ? 'small'
+          : '',
       ]"
     />
     <ComplexItem
       :class="[
-        typeView === 'tile' ? 'medium' : typeView === 'table' ? 'small' : '',
-      ]"
-    />
-    <ComplexItem
-      :class="[
-        typeView === 'tile' ? 'medium' : typeView === 'table' ? 'small' : '',
-      ]"
-    />
-    <ComplexItem
-      :class="[
-        typeView === 'tile' ? 'medium' : typeView === 'table' ? 'small' : '',
+        activeType === 'tile'
+          ? 'medium'
+          : activeType === 'table'
+          ? 'small'
+          : '',
       ]"
     />
   </div>
@@ -28,20 +26,18 @@ import { useComplexStore } from "@/app/store/complex";
 import ComplexItem from "@/entities/complexItem.vue";
 import { storeToRefs } from "pinia";
 
-const objectStore = useComplexStore();
-const { typeView } = storeToRefs(objectStore);
+const { activeType } = storeToRefs(useComplexStore());
 </script>
 
 <style scoped lang="scss">
 .listItems {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  height: max-content;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
   @apply bg-grey-200;
-  row-gap: 30px;
+  overflow-y: scroll;
 
   &.listItems--tile {
     display: grid;
@@ -52,6 +48,7 @@ const { typeView } = storeToRefs(objectStore);
   }
 
   @media screen and (max-width: 1600px) {
+    grid-template-columns: repeat(2, 1fr);
     &.listItems--tile {
       grid-template-columns: repeat(3, 1fr);
     }
