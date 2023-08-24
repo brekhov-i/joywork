@@ -34,7 +34,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import EntrancesList from "@/widgets/homePage/entranceList/entranceList.vue";
 </script>
 

@@ -214,7 +214,6 @@ import RadioButton from "primevue/radiobutton";
 import Accordion from "primevue/accordion";
 import AccordionTab, {
   AccordionTabPassThroughOptions,
-  AccordionTabContext,
 } from "primevue/accordiontab";
 import { PTOptions } from "primevue/ts-helpers";
 import { ref } from "vue";
@@ -223,7 +222,7 @@ import MyButton from "@/shared/UI/MyButton.vue";
 const alignment = ref<string>("left");
 
 const styleAccordionTab = ref<PTOptions<AccordionTabPassThroughOptions>>({
-  headerAction: ({ context }: { context: AccordionTabContext }) => ({
+  headerAction: () => ({
     class: [
       "!p-3.5 !border-grey-400 !flex !flex-row !items-center !gap-x-2.5 !font-normal !bg-white",
     ],

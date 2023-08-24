@@ -4,14 +4,7 @@ import { InputTextContext, InputTextProps } from "primevue/inputtext";
 export default {
   pt: {
     inputText: {
-      root: ({
-        props,
-        context,
-      }: {
-        props: InputTextProps;
-        context: InputTextContext;
-      }) => {
-        console.log(context);
+      root: ({ context }: { context: InputTextContext }) => {
         return {
           class: [
             "border border-grey-400 rounded h-9 py-2 px-4",
