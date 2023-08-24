@@ -14,6 +14,7 @@ module.exports = {
       white: "#ffffff",
       grey: {
         DEFAULT: "#f2f2f2",
+        100: "#F3F3F3",
         200: "#F5F5F5",
         400: "#DEDEDE",
         900: "#757575",
@@ -29,10 +30,15 @@ module.exports = {
       sans: ["Lato, sans-serif"],
     },
     extend: {
+      padding: {
+        7.5: "30px",
+      },
       margin: {
+        0.25: "1px",
         7.5: "30px",
       },
       gap: {
+        7.5: "30px",
         13: "52px",
         12.5: "50px",
       },

@@ -1,11 +1,17 @@
 <template>
+  <Teleport to="body">
+    <FormAddComplex
+      :isOpen="formAddComplexOpen"
+      @closeModel="formAddComplexOpen = !formAddComplexOpen"
+    />
+  </Teleport>
   <div class="defaultLayout">
     <header class="header">
       <div class="header__top">
         <div class="header__title">Жилые комплексы</div>
       </div>
       <div class="header__bottom">
-        <header-nav @changeOpen="emits('changeOpen')" />
+        <header-nav @changeOpen="formAddComplexOpen = !formAddComplexOpen" />
         <header-type-grid />
       </div>
     </header>
@@ -31,10 +37,10 @@
 <script setup lang="ts">
 import HeaderNav from "@/widgets/header/header-nav.vue";
 import HeaderTypeGrid from "@/widgets/header/header-type-grid.vue";
+import FormAddComplex from "@/widgets/forms/formAddComplex.vue";
+import { ref } from "vue";
 
-const emits = defineEmits<{
-  (e: "changeOpen"): void;
-}>();
+const formAddComplexOpen = ref<boolean>(false);
 </script>
 
 <style lang="scss">

@@ -1,8 +1,10 @@
 import { createApp } from "vue";
 import App from "@/app/App.vue";
-import router from "@/app/router";
 import { createPinia } from "pinia";
+import router from "@/app/router";
 import PrimeVue from "primevue/config";
+
+//Components
 import InputText from "primevue/inputtext";
 import Dropdown from "primevue/dropdown";
 import Textarea from "primevue/textarea";
@@ -25,8 +27,8 @@ app.component("InputSwitch", InputSwitch);
 app.component("Message", Message);
 app.component("MyButton", MyButton);
 
-app.use(router);
 app.use(pinia);
+app.use(router);
 app.use(PrimeVue, primeVueSettings);
 
 app.mount("#app");
