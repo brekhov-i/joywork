@@ -1,22 +1,40 @@
+import { InputSwitchProps } from "primevue/inputswitch";
+import { InputTextContext, InputTextProps } from "primevue/inputtext";
+
 export default {
   pt: {
     inputText: {
-      root: {
-        class: [
-          "border border-grey-400 rounded h-9 py-2 px-4",
-          "focus:!shadow-none focus:!border-green hover:!border-green",
-        ],
+      root: ({
+        props,
+        context,
+      }: {
+        props: InputTextProps;
+        context: InputTextContext;
+      }) => {
+        console.log(context);
+        return {
+          class: [
+            "border border-grey-400 rounded h-9 py-2 px-4",
+            "focus:!shadow-none focus:!border-green hover:!border-green",
+            context.disabled
+              ? "focus:!border-grey-400 hover:!border-grey-400 !bg-[#F2F3F3]"
+              : "",
+          ],
+        };
       },
     },
     inputswitch: {
       root: { class: ["inline-block relative", "w-12 h-7"] },
-      slider: {
-        class: [
-          "absolute cursor-pointer top-0 left-0 right-0 bottom-0 border border-transparent",
-          "transition-colors duration-200 rounded-2xl",
-          "focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]",
-          "before:absolute before:content-'' before:top-1/2 before:bg-white before:dark:bg-gray-900 before:w-5 before:h-5 before:left-1 before:-mt-2.5 before:rounded-full before:transition-duration-200",
-        ],
+      slider: ({ props }: { props: InputSwitchProps }) => {
+        return {
+          class: [
+            "absolute cursor-pointer top-0 left-0 right-0 bottom-0 border border-transparent",
+            "transition-colors duration-200 rounded-2xl",
+            "focus:outline-none focus:outline-offset-0 focus:shadow-none",
+            "before:absolute before:content-'' before:top-1/2 before:bg-white before:dark:bg-gray-900 before:w-5 before:h-5 before:left-1 before:-mt-2.5 before:rounded-full before:transition-duration-200",
+            props.modelValue ? "!bg-green" : "!bg-grey-400",
+          ],
+        };
       },
     },
     calendar: {
@@ -110,13 +128,13 @@ export default {
     },
     message: {
       root: {
-        class: ["!border-l-0"],
+        class: ["w-full !border-l-0"],
       },
       icon: {
         class: ["mr-4"],
       },
       text: {
-        class: ["text-black"],
+        class: ["text-black !text-sm"],
       },
     },
   },

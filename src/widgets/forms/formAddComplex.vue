@@ -92,7 +92,11 @@
           <div class="title">{{ utp.title }}</div>
           <div class="description">{{ utp.description }}</div>
           <div class="utp__btns">
-            <MyButton class="utp__delete" @click.prevent="deleteUtp(index)">
+            <MyButton
+              :theme="'green'"
+              class="utp__delete"
+              @click.prevent="deleteUtp(index)"
+            >
               <svg
                 width="18"
                 height="18"
@@ -106,7 +110,11 @@
                 />
               </svg>
             </MyButton>
-            <MyButton class="utp__edit" @click.prevent="editUtp(index)">
+            <MyButton
+              :theme="'grey-icon'"
+              class="utp__edit"
+              @click.prevent="editUtp(index)"
+            >
               <svg
                 width="18"
                 height="18"
@@ -139,7 +147,11 @@
           />
           <MyTextarea v-model="utp.description" placeholder="Описание УТП" />
           <div class="utp__btns">
-            <MyButton class="utp__save" @click.prevent="saveUtp()">
+            <MyButton
+              :theme="'green'"
+              class="utp__save"
+              @click.prevent="saveUtp()"
+            >
               <svg
                 width="18"
                 height="18"
@@ -154,7 +166,11 @@
               </svg>
               Сохранить
             </MyButton>
-            <MyButton class="utp__clear" @click.prevent="clearUtp()">
+            <MyButton
+              :theme="'grey-icon'"
+              class="utp__clear"
+              @click.prevent="clearUtp()"
+            >
               <svg
                 width="18"
                 height="18"
@@ -197,7 +213,7 @@
       </form>
     </template>
     <template v-slot:formBtns>
-      <MyButton class="submit" @click.prevent="addNewComplex()"
+      <MyButton :theme="'green'" class="submit" @click.prevent="addNewComplex()"
         >Добавить</MyButton
       >
     </template>

@@ -125,7 +125,6 @@ import MyButton from "@/shared/UI/MyButton.vue";
 import DefaultLayout from "@/shared/layouts/defaultLayout.vue";
 import FormAddHome from "@/widgets/forms/formAddHome.vue";
 import ListHome from "@/widgets/listHome.vue";
-import NavWidget, { TNavItem } from "@/widgets/navWidget.vue";
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 

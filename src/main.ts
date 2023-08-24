@@ -11,6 +11,7 @@ import Calendar from "primevue/calendar";
 import InputSwitch from "primevue/inputswitch";
 import Message from "primevue/message";
 import primeVueSettings from "./shared/utils/primeVueSettings";
+import MyButton from "@/shared/UI/MyButton.vue";
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -22,6 +23,7 @@ app.component("MultiSelect", MultiSelect);
 app.component("Calendar", Calendar);
 app.component("InputSwitch", InputSwitch);
 app.component("Message", Message);
+app.component("MyButton", MyButton);
 
 app.use(router);
 app.use(pinia);

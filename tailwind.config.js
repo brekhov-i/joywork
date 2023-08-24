@@ -32,6 +32,10 @@ module.exports = {
       margin: {
         7.5: "30px",
       },
+      gap: {
+        13: "52px",
+        12.5: "50px",
+      },
     },
   },
   plugins: [],
