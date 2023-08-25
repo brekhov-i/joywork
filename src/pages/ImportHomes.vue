@@ -34,7 +34,7 @@ import StatusStep from "@/widgets/importSteps/statusStep.vue";
 import defaultLayout from "@/shared/layouts/defaultLayout.vue";
 import { ref } from "vue";
 
-const activeItem = ref<number>(3);
+const activeItem = ref<number>(0);
 const stepItems = ref<TStepItem[]>([
   {
     id: 0,

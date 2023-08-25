@@ -4,7 +4,12 @@
       Мои объекты
       <div class="count">12</div>
     </RouterLink>
-    <RouterLink to="/import" class="nav__link">Импорт</RouterLink>
+    <RouterLink
+      to="/import"
+      class="nav__link"
+      exactActiveClass="nav__link--active"
+      >Импорт</RouterLink
+    >
     <button class="nav__link header__addObject" @click="emits('changeOpen')">
       <svg
         width="22"

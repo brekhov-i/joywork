@@ -127,10 +127,18 @@
         </template>
       </Message>
       <div class="fieldStep__btns flex flex-row">
-        <MyButton :theme="'grey-icon'" class="text-grey-900 mr-2.5 !px-5"
+        <MyButton
+          :theme="'grey-icon'"
+          class="text-grey-900 mr-2.5 !px-5"
+          @click="emits('update:activeItem', 0)"
           >Назад</MyButton
         >
-        <MyButton :theme="'green'" class="!px-5">Далее</MyButton>
+        <MyButton
+          :theme="'green'"
+          class="!px-5"
+          @click="emits('update:activeItem', 2)"
+          >Далее</MyButton
+        >
       </div>
     </div>
   </div>

@@ -97,7 +97,10 @@
       </template>
     </Message>
     <div class="objectStep__btns flex flex-row">
-      <MyButton :theme="'grey-icon'" class="text-grey-900 mr-2.5 !px-5"
+      <MyButton
+        :theme="'grey-icon'"
+        class="text-grey-900 mr-2.5 !px-5"
+        @click="emits('update:activeItem', 3)"
         >Назад</MyButton
       >
       <MyButton :theme="'green'" class="!px-5">Далее</MyButton>
@@ -107,6 +110,10 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+
+const emits = defineEmits<{
+  (e: "update:activeItem", value: number): void;
+}>();
 
 const statusFromFile = ref<{ id: string; name: string }[]>([
   { id: "booking", name: "Бронь" },

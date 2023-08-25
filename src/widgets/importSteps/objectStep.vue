@@ -149,16 +149,28 @@
       </template>
     </Message>
     <div class="objectStep__btns flex flex-row">
-      <MyButton :theme="'grey-icon'" class="text-grey-900 mr-2.5 !px-5"
+      <MyButton
+        :theme="'grey-icon'"
+        class="text-grey-900 mr-2.5 !px-5"
+        @click="emits('update:activeItem', 1)"
         >Назад</MyButton
       >
-      <MyButton :theme="'green'" class="!px-5">Далее</MyButton>
+      <MyButton
+        :theme="'green'"
+        class="!px-5"
+        @click="emits('update:activeItem', 3)"
+        >Далее</MyButton
+      >
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
+
+const emits = defineEmits<{
+  (e: "update:activeItem", value: number): void;
+}>();
 
 const homeFromFile = ref<string>("Тестовый ЖК Невский");
 const homeFromSystem = ref();
