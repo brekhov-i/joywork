@@ -91,10 +91,12 @@ const change = computed<string>(() => {
 @import "@/app/styles/function.scss";
 .complexItem {
   width: 100%;
-  height: max-content;
+  height: 353px;
   display: grid;
   grid-template-columns: vw(300, 1920) 1fr;
   @apply bg-white;
+  overflow: hidden;
+  border-radius: 4px;
 
   &.medium {
     width: 100%;
@@ -103,6 +105,9 @@ const change = computed<string>(() => {
     border-radius: 5px;
     overflow: hidden;
 
+    .complexItem__image {
+      height: 353px;
+    }
     .complexItem__content {
       grid-template-columns: 1fr;
       padding: 16px;
@@ -137,10 +142,12 @@ const change = computed<string>(() => {
     }
     .complexItem__advertisement {
       grid-row: 4;
+      grid-column: 1;
       padding: 16px 0;
     }
     .complexItem__counts {
       grid-row: 5;
+      grid-column: 1;
       padding: 16px 0 0 0;
 
       strong {
@@ -151,7 +158,7 @@ const change = computed<string>(() => {
 
   &__image {
     width: 100%;
-    height: auto;
+    height: 100%;
 
     img {
       width: 100%;
@@ -162,14 +169,15 @@ const change = computed<string>(() => {
 
   &__content {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 0.8fr;
   }
   &__head {
     width: 100%;
     height: auto;
     grid-row: 1;
+    grid-column: span 2;
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
     justify-content: flex-start;
     align-items: flex-start;
     padding: 30px;
@@ -178,6 +186,7 @@ const change = computed<string>(() => {
   }
 
   &__title {
+    width: max-content;
     position: relative;
     font-size: 27px;
     line-height: 100%;
@@ -195,19 +204,20 @@ const change = computed<string>(() => {
   }
 
   &__nav {
-    width: 100%;
+    width: auto;
     height: auto;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 15px;
+    margin-left: auto;
   }
 
   &__develop {
     @apply text-grey-900;
     font-size: 15px;
     line-height: 100%;
-    margin-right: auto;
+    margin-right: 30px;
   }
 
   &__btnMenu {
@@ -246,8 +256,8 @@ const change = computed<string>(() => {
   }
   &__change {
     width: 100%;
-    grid-row: 3;
-    grid-column: 1;
+    grid-row: 2;
+    grid-column: 2;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -259,10 +269,11 @@ const change = computed<string>(() => {
     font-size: 15px;
   }
   &__advertisement {
-    grid-row: 4;
+    width: 100%;
+    grid-row: 3;
+    grid-column: 1;
     padding: 18px 30px;
-    border-bottom: 1px solid;
-    @apply border-grey;
+
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -286,18 +297,20 @@ const change = computed<string>(() => {
     }
   }
   &__counts {
-    grid-row: 5;
+    grid-row: 3;
+    grid-column: 2;
     padding: 18px 30px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     column-gap: 10px;
+    border-left: 1px solid;
+    @apply border-grey;
 
     a {
-      padding: 17px 20px;
+      padding: 8px 20px;
       border-radius: 3px;
-      border: 1px solid;
-      @apply border-grey;
+      border: 1px solid #dedede;
       background: var(
         --linear,
         linear-gradient(180deg, #fefefe 0%, #f6f6f6 100%)
@@ -307,7 +320,7 @@ const change = computed<string>(() => {
 
   @media screen and (max-width: 1600px) {
     width: 100%;
-    height: max-content;
+    height: 280px;
     display: grid;
     grid-template-columns: vw(300, 1440) 1fr;
     @apply bg-white;
@@ -322,6 +335,9 @@ const change = computed<string>(() => {
       .complexItem__content {
         grid-template-columns: 1fr;
         padding: 16px;
+      }
+      .complexItem__image {
+        height: 280px;
       }
       .complexItem__head {
         flex-direction: column;
@@ -359,7 +375,7 @@ const change = computed<string>(() => {
 
     &__content {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 0.8fr;
     }
     &__head {
       padding: 26px;
@@ -372,7 +388,7 @@ const change = computed<string>(() => {
     }
 
     &__nav {
-      margin-bottom: 30px;
+      margin-bottom: 0px;
     }
 
     &__develop {
@@ -401,11 +417,10 @@ const change = computed<string>(() => {
       font-size: 14px;
     }
     &__counts {
-      padding: 16px 25px;
       column-gap: 8px;
 
       a {
-        padding: 16px 18px;
+        padding: 8px 18px;
         font-size: 15px;
       }
     }

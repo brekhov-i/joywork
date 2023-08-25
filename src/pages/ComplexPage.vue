@@ -3,7 +3,7 @@
   <DefaultLayout>
     <div class="complexPage">
       <div class="infoByComplex">
-        <div class="infoByComplex__title">{{ complexData?.title }}</div>
+        <div class="infoByComplex__title">Тестовый ЖК Невский</div>
         <div class="infoByComplex__content">
           <div class="infoByComplex-block infoByComplex__infoBlock">
             <div class="block-head infoBlock__head">
