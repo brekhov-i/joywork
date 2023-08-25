@@ -2,7 +2,10 @@
   <div class="mainPage">
     <div class="mainPage__title mb-7.5">Тестовый Дом</div>
     <HomeNav class="mb-7.5" />
-    <MyButton :theme="'green'" class="mainPage__viewChess mb-7.5">
+    <RouterLink
+      to="/home/2409fjd/viewhome"
+      class="mainPage__viewChess mb-7.5 bg-green flex flex-row items-center px-5 py-3 gap-x-1.5 text-white rounded"
+    >
       <svg
         width="16"
         height="16"
@@ -16,7 +19,7 @@
         />
       </svg>
       Посмотреть объект
-    </MyButton>
+    </RouterLink>
     <div
       class="mainPage__information w-full border border-grey-400 px-7.5 py-5"
     >
