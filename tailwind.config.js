@@ -32,6 +32,9 @@ module.exports = {
       sans: ["Lato, sans-serif"],
     },
     extend: {
+      spacing: {
+        4.5: "18px",
+      },
       padding: {
         7.5: "30px",
       },

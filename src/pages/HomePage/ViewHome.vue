@@ -1,9 +1,11 @@
 <template>
   <div class="viewHome">
-    <div class="viewHome__title">Просмотр объекта</div>
+    <div class="viewHome__title 2xl:text-3xl xl:text-2xl mb-7.5">
+      Просмотр объекта
+    </div>
     <div class="viewHome__table">
-      <div class="table__head flex flex-col">
-        <div class="table__filters flex flex-row items-center">
+      <div class="table__head flex flex-col" :class="viewGrid">
+        <div class="table__filters flex flex-row items-center mb-7.5">
           <div
             class="filters__roms flex flex-col justify-start items-start h-full w-max"
           >
@@ -85,8 +87,8 @@
               />
             </div>
           </div>
-          <div class="filters__view flex flex-col">
-            <label class="text-grey-900 mb-2">Площадь, м2</label>
+          <div class="filters__view flex flex-col ml-auto">
+            <label class="text-grey-900 mb-2">Вид</label>
             <Dropdown
               v-model="filters.view"
               :options="viewGrid"
@@ -154,32 +156,63 @@
             </Dropdown>
           </div>
         </div>
-        <div class="table__foundInfo">
-          Найдено 500 помещений. Из них свободно: <span>500</span>.
+        <div class="table__foundInfo text-sm text-black mb-5">
+          Найдено 500 помещений. Из них свободно:
+          <span class="text-green">500</span>.
         </div>
-        <div class="table__infoBlock">
-          <div class="infoItem">
-            <div class="infoItem__color bg-green"></div>
-            <div class="infoItem__text">Свободные</div>
+        <div
+          class="table__infoBlock flex flex-row items-center bg-grey-100 py-2.5 2xl:gap-x-12.5 xl:gap-x-10"
+        >
+          <div class="infoItem flex flex-row items-center">
+            <div
+              class="infoItem__color bg-green w-4.5 h-4.5 rounded mr-2.5"
+            ></div>
+            <div class="infoItem__text 2xl:text-base xl:text-sm text-grey-900">
+              Свободные
+            </div>
           </div>
-          <div class="infoItem">
-            <div class="infoItem__color bg-orange"></div>
-            <div class="infoItem__text">Забронированные</div>
+          <div class="infoItem flex flex-row items-center">
+            <div
+              class="infoItem__color bg-orange w-4.5 h-4.5 rounded mr-2.5"
+            ></div>
+            <div class="infoItem__text 2xl:text-base xl:text-sm text-grey-900">
+              Забронированные
+            </div>
           </div>
-          <div class="infoItem">
-            <div class="infoItem__color bg-grey-900"></div>
-            <div class="infoItem__text">Проданные</div>
+          <div class="infoItem flex flex-row items-center">
+            <div
+              class="infoItem__color bg-grey-900 w-4.5 h-4.5 rounded mr-2.5"
+            ></div>
+            <div class="infoItem__text 2xl:text-base xl:text-sm text-grey-900">
+              Проданные
+            </div>
           </div>
-          <div class="infoItem">
-            <div class="infoItem__color bg-grey-400"></div>
-            <div class="infoItem__text">Недоступные</div>
+          <div class="infoItem flex flex-row items-center">
+            <div
+              class="infoItem__color bg-grey-400 w-4.5 h-4.5 rounded mr-2.5"
+            ></div>
+            <div class="infoItem__text 2xl:text-base xl:text-sm text-grey-900">
+              Недоступные
+            </div>
           </div>
-          <div class="table__onlyFree">
+          <div
+            class="table__viewPrice ml-auto flex flex-row items-center gap-2"
+            v-if="filters.view.value === 'grid'"
+          >
             <InputSwitch v-model="filters.onlyFree" />
-            <label for="onlyFree">Только свободные</label>
+            <label for="onlyFree" class="2xl:text-base xl:text-sm text-grey-900"
+              >Скрыть стоимость</label
+            >
+          </div>
+          <div class="table__onlyFree ml-auto flex flex-row items-center gap-2">
+            <InputSwitch v-model="filters.onlyFree" />
+            <label for="onlyFree" class="2xl:text-base xl:text-sm text-grey-900"
+              >Только свободные</label
+            >
           </div>
         </div>
       </div>
+      <div class="table__body"></div>
     </div>
   </div>
 </template>
@@ -268,9 +301,18 @@ const viewGrid = ref([
   column-gap: 80px;
 }
 
+.table__infoBlock {
+  padding-left: 97px;
+  padding-right: 147px;
+}
+
 @media screen and (max-width: 1600px) {
   .table__filters {
     column-gap: 40px;
+  }
+  .table__infoBlock {
+    padding-left: 57px;
+    padding-right: 77px;
   }
 }
 </style>
