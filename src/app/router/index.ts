@@ -31,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
         name: "chess",
         component: () => import("@/pages/HomePage/ChessPage.vue"),
       },
+      {
+        path: "viewHome",
+        name: "viewHome",
+        component: () => import("@/pages/HomePage/ViewHome.vue"),
+      },
     ],
   },
 ];

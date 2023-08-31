@@ -1,5 +1,7 @@
+import { DropdownContext } from "primevue/dropdown";
 import { InputSwitchProps } from "primevue/inputswitch";
-import { InputTextContext, InputTextProps } from "primevue/inputtext";
+import { InputTextContext } from "primevue/inputtext";
+import { SelectButtonContext } from "primevue/selectbutton";
 
 export default {
   pt: {
@@ -64,10 +66,16 @@ export default {
         class: "border border-grey-400 rounded px-4 py-2",
       },
       trigger: {
-        class: ["!w-max"],
+        class: ["!w-max !ml-2"],
       },
-      item: {
-        class: "text-grey-900",
+      item: ({ context }: { context: DropdownContext }) => ({
+        class: [
+          "!text-sm !text-grey-900 !p-3",
+          context.selected ? "!bg-green-50" : "",
+        ],
+      }),
+      input: {
+        class: ["!p-0 !text-sm !flex !items-center"],
       },
       emptyMessage: {
         class: "text-grey-900 text-sm",
@@ -129,6 +137,25 @@ export default {
       text: {
         class: ["text-black !text-sm"],
       },
+    },
+    selectButton: {
+      root: () => ({
+        class: ["flex flex-row !gap-x-2.5"],
+      }),
+      button: ({ context }: { context: SelectButtonContext }) => ({
+        class: [
+          "!border-r !border-solid !rounded focus:!shadow-none  h-full",
+          "2xl:!py-2.5 2xl:!px-2.5 xl:!py-1.5 xl:!px-2.5",
+          context.active ? "!bg-green !border-green" : "!border-grey-400",
+        ],
+      }),
+      label: ({ context }: { context: SelectButtonContext }) => ({
+        class: [
+          "!text-grey-900 !text-sm",
+          "2xl: !text-sm xl: !text-sm",
+          context.active ? "!text-white !font-bold" : "!font-normal",
+        ],
+      }),
     },
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="chessPage">
+  <div class="chessPage p-7.5">
     <div class="chessPage__title mb-7.5">
       Детализация шахматки:
       <div class="subtitle">Тестовый ЖК Невский — Тестовый дом</div>

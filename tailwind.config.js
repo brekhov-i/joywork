@@ -5,6 +5,7 @@ module.exports = {
     colors: {
       green: {
         DEFAULT: "#4CAF50",
+        50: "#C1FFC4",
         100: "#98E99B",
       },
       black: {
@@ -25,11 +26,16 @@ module.exports = {
         100: "#F1F6FF",
         500: "#D4E3FD",
       },
+      orange: "#F2B720",
     },
     fontFamily: {
       sans: ["Lato, sans-serif"],
     },
     extend: {
+      spacing: {
+        15: "60px",
+        4.5: "18px",
+      },
       padding: {
         7.5: "30px",
       },

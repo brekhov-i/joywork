@@ -28,7 +28,7 @@
         </ul>
       </nav>
     </div>
-    <main>
+    <main class="w-full">
       <slot />
     </main>
   </div>
@@ -102,7 +102,6 @@ const formAddComplexOpen = ref<boolean>(false);
   }
 
   main {
-    width: 100%;
     height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
