@@ -33,6 +33,7 @@ module.exports = {
     },
     extend: {
       spacing: {
+        15: "60px",
         4.5: "18px",
       },
       padding: {

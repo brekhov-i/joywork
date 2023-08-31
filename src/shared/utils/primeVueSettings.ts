@@ -66,7 +66,7 @@ export default {
         class: "border border-grey-400 rounded px-4 py-2",
       },
       trigger: {
-        class: ["!w-max"],
+        class: ["!w-max !ml-2"],
       },
       item: ({ context }: { context: DropdownContext }) => ({
         class: [
@@ -74,6 +74,9 @@ export default {
           context.selected ? "!bg-green-50" : "",
         ],
       }),
+      input: {
+        class: ["!p-0 !text-sm !flex !items-center"],
+      },
       emptyMessage: {
         class: "text-grey-900 text-sm",
       },

@@ -14,6 +14,7 @@ import InputSwitch from "primevue/inputswitch";
 import Message from "primevue/message";
 import primeVueSettings from "./shared/utils/primeVueSettings";
 import MyButton from "@/shared/UI/MyButton.vue";
+import Tooltip from "primevue/tooltip";
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -26,6 +27,8 @@ app.component("Calendar", Calendar);
 app.component("InputSwitch", InputSwitch);
 app.component("Message", Message);
 app.component("MyButton", MyButton);
+
+app.directive("tooltip", Tooltip);
 
 app.use(pinia);
 app.use(router);

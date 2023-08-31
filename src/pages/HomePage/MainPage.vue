@@ -1,5 +1,5 @@
 <template>
-  <div class="mainPage">
+  <div class="mainPage p-7.5">
     <div class="mainPage__title mb-7.5">Тестовый Дом</div>
     <HomeNav class="mb-7.5" />
     <RouterLink
