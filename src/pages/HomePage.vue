@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <div class="homePage bg-white h-full">
+    <div class="relative homePage bg-white h-max min-h-full">
       <RouterView />
     </div>
   </DefaultLayout>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="viewHome relative flex flex-col h-full"
+    class="viewHome flex flex-col h-full min-h-full"
     :class="[filters.view?.value !== 'facades' ? 'px-7.5 py-5' : '']"
   >
     <WindowInfoForList
