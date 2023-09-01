@@ -53,7 +53,11 @@
         <div class="item__title">Планировки помещений</div>
         <div class="item__fullness">Заполнение 100%</div>
         <div class="item__bts flex flex-row">
-          <MyButton :theme="'grey-icon'" class="!w-max text-sm text-grey-900">
+          <MyButton
+            :theme="'grey-icon'"
+            class="!w-max text-sm text-grey-900"
+            @click="router.push('/home/2409fjd/planLayout')"
+          >
             <svg
               width="18"
               height="18"
