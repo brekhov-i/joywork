@@ -1,4 +1,19 @@
 <template>
+  <teleport to="body">
+    <PlanRoomsWindow
+      :isOpenEditPlanWindow="isOpenEditPlanWindow"
+      @update:isOpenEditPlanWindow="
+        isOpenEditPlanWindow = !isOpenEditPlanWindow
+      "
+    />
+    <PlanEditWindow
+      :isOpenPlanEditWindow="isOpenPlanEditWindow"
+      @update:isOpenPlanEditWindow="
+        isOpenPlanEditWindow = !isOpenPlanEditWindow
+      "
+    ></PlanEditWindow>
+  </teleport>
+
   <DataTable
     v-model:selection="selectedPlanings"
     :value="planings"
@@ -57,6 +72,7 @@
             to="/"
             class="text-green underline underline-offset-2 2xl:mt-5 xl:3"
             link
+            @click="isOpenEditPlanWindow = !isOpenEditPlanWindow"
             >Отметить на шахматке</Button
           >
         </div>
@@ -79,6 +95,7 @@
         <Button
           severity="success"
           class="mr-2.5 mb-2.5 xl:w-full flex justify-center"
+          @click="isOpenPlanEditWindow = true"
         >
           <svg
             width="19"
@@ -124,6 +141,8 @@
 </template>
 
 <script setup lang="ts">
+import PlanRoomsWindow from "@/widgets/homePage/planLayout/planRoomsWindow.vue";
+import PlanEditWindow from "@/widgets/homePage/planLayout/planEditWindow/planEditWindow.vue";
 import OverlayPanel, {
   OverlayPanelPassThroughOptions,
 } from "primevue/overlaypanel";
@@ -136,6 +155,9 @@ import { ref } from "vue";
 import { ConfirmDialogPassThroughOptions } from "primevue/confirmdialog";
 
 const confirm = useConfirm();
+const isOpenEditPlanWindow = ref(false);
+const isOpenPlanEditWindow = ref(false);
+
 const tableStyle = ref<PTOptions<DataTablePassThroughOptions>>({
   bodyRow: ({ context }) => {
     console.log(context);
@@ -207,8 +229,7 @@ const confirmpopupStyle = ref<PTOptions<ConfirmDialogPassThroughOptions>>({
   },
 });
 const overlayPanelStyle = ref<PTOptions<OverlayPanelPassThroughOptions>>({
-  root: ({ instance }) => {
-    console.log(instance);
+  root: () => {
     return {
       class: ["!border !border-solid !border-green "],
     };

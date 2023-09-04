@@ -135,7 +135,7 @@ export default {
         console.log(props);
         return {
           class: [
-            "w-full !border-l-0 !m-0",
+            "w-full !border-l !m-0",
             props.severity === "info"
               ? "!bg-blue-100 !border !border-l !border-blue-500"
               : "",
@@ -186,11 +186,13 @@ export default {
           class: [
             "!py-2 !px-3 rounded ",
             props?.severity === "success"
-              ? "!bg-green !text-white"
+              ? "!bg-green !text-white !shadow-none"
               : props?.severity === "danger"
               ? "!bg-red"
               : props?.severity === "info"
               ? "!border !border-blue"
+              : props?.severity === "secondary"
+              ? "!bg-gradient-to-r !from-[#FEFEFE] !to-[#F6F6F6] !border !border-grey-400 !text-grey-900 !shadow-none"
               : "!border-0",
             props.link ? "!bg-transparent !text-green" : "",
           ],
