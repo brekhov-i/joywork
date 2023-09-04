@@ -1,7 +1,10 @@
+import { ButtonContext, ButtonProps } from "primevue/button";
 import { DropdownContext } from "primevue/dropdown";
 import { InputSwitchProps } from "primevue/inputswitch";
 import { InputTextContext } from "primevue/inputtext";
+import { MessageProps } from "primevue/message";
 import { SelectButtonContext } from "primevue/selectbutton";
+import { prop } from "vue-class-component";
 
 export default {
   pt: {
@@ -128,14 +131,34 @@ export default {
       },
     },
     message: {
-      root: {
-        class: ["w-full !border-l-0"],
+      root: ({ props }: { props: MessageProps }) => {
+        console.log(props);
+        return {
+          class: [
+            "w-full !border-l !m-0",
+            props.severity === "info"
+              ? "!bg-blue-100 !border !border-l !border-blue-500"
+              : "",
+          ],
+        };
       },
-      icon: {
-        class: ["mr-4"],
+      wrapper: ({ props }: { props: MessageProps }) => {
+        return {
+          class: ["!p-3.5"],
+        };
       },
-      text: {
-        class: ["text-black !text-sm"],
+      icon: ({ props }: { props: MessageProps }) => {
+        return {
+          class: [props.severity === "info" ? "mr-4" : ""],
+        };
+      },
+      text: ({ props }: { props: MessageProps }) => {
+        return {
+          class: [
+            props.severity === "info" ? "2xl:max-w-[1377px]" : "",
+            "text-black 2xl:!text-sm xl:!text-[13px]",
+          ],
+        };
       },
     },
     selectButton: {
@@ -156,6 +179,25 @@ export default {
           context.active ? "!text-white !font-bold" : "!font-normal",
         ],
       }),
+    },
+    button: {
+      root: ({ props }: { props: ButtonProps }) => {
+        return {
+          class: [
+            "!py-2 !px-3 rounded ",
+            props?.severity === "success"
+              ? "!bg-green !text-white !shadow-none"
+              : props?.severity === "danger"
+              ? "!bg-red"
+              : props?.severity === "info"
+              ? "!border !border-blue"
+              : props?.severity === "secondary"
+              ? "!bg-gradient-to-r !from-[#FEFEFE] !to-[#F6F6F6] !border !border-grey-400 !text-grey-900 !shadow-none"
+              : "!border-0",
+            props.link ? "!bg-transparent !text-green" : "",
+          ],
+        };
+      },
     },
   },
 };
