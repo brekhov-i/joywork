@@ -75,7 +75,7 @@ const codePlan = ref<string>("");
   justify-content: center;
   align-items: center;
   overflow-y: scroll;
-  padding: 100px 0;
+  padding: 30px 0;
   opacity: 0;
   visibility: hidden;
   transition: 0.5s all ease-in-out;

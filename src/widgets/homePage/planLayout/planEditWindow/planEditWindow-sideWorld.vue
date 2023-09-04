@@ -1,12 +1,17 @@
 <template>
   <div class="planEditWindowSideWorld">
-    <div class="planEditWindowSideWorld__checkboxWrapper">
+    <div class="planEditWindowSideWorld__checkboxWrapper mb-10">
       <InputSwitch v-model="isViewSideWorld" />
       <label for="">Отображать стороны света</label>
     </div>
     <div class="planEditWindowSideWorld__content">
       <div class="planEditWindowSideWorld__compass">
-        <div class="compassImage" ref="wrapper" @mouseleave="drag = false">
+        <div
+          class="compassImage"
+          ref="wrapper"
+          @mouseleave="drag = false"
+          @mousemove="mousemoveHandler($event)"
+        >
           <svg
             width="300"
             height="300"
@@ -72,26 +77,65 @@
               fill="#9E9E9E"
             />
           </svg>
-          <div class="pointWrapper">
-            <div class="point" ref="point"></div>
-          </div>
+          <div
+            class="point"
+            ref="point"
+            @mousedown="mouseDownHandler($event)"
+            @mouseup="drag = false"
+          ></div>
         </div>
-        <InputText />
+        <InputText v-model="degrees" />
       </div>
       <div class="planEditWindowSideWorld__imagePlan">
-        <img src="" alt="" />
+        <img
+          :src="require('@/shared/assets/images/layoutsRoom/layout1.png')"
+          alt=""
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const isViewSideWorld = ref<boolean>(false);
 const point = ref<HTMLElement>();
 const wrapper = ref<HTMLElement>();
 const drag = ref<boolean>(false);
+const degrees = ref<string>("0");
+let coordPoint: DOMRect | null = null;
+let x1 = 0;
+let y1 = 0;
+
+const mouseDownHandler = (e: MouseEvent) => {
+  if (wrapper.value && point.value) {
+    drag.value = true;
+    coordPoint = wrapper.value.getBoundingClientRect();
+    x1 = coordPoint.left + coordPoint.width / 2;
+    y1 = coordPoint.top + coordPoint.height / 2;
+  }
+};
+
+const mousemoveHandler = (e: MouseEvent) => {
+  if (wrapper.value && point.value && drag.value) {
+    let angle = Math.atan2(e.y - y1, e.x - x1);
+    let degreesEd = angle * 57.3;
+
+    if (angle < 0) {
+      degreesEd = 360 + degreesEd;
+    }
+
+    wrapper.value.style.transform = "rotate(" + degreesEd + "deg)";
+    degrees.value = String(Math.floor(degreesEd));
+  }
+};
+
+watch(degrees, (newV) => {
+  if (wrapper.value) {
+    wrapper.value.style.transform = "rotate(" + newV + "deg)";
+  }
+});
 </script>
 
 <style scoped lang="scss">
@@ -131,28 +175,14 @@ const drag = ref<boolean>(false);
         width: 100%;
         height: 100%;
       }
-      .pointWrapper {
+      .point {
         position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0px;
-        width: 100%;
-        height: 100%;
+        top: calc(50% - 12.5px);
+        right: -12.5px;
+        width: 25px;
+        height: 25px;
         border-radius: 100%;
-        border: 1px solid;
-        transform: rotate(0deg);
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        .point {
-          position: relative;
-          top: -12px;
-          width: 25px;
-          height: 25px;
-          border-radius: 100%;
-          background-color: #3a8efa;
-        }
+        background-color: #3a8efa;
       }
     }
   }
