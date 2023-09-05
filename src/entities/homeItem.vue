@@ -1,5 +1,5 @@
 <template>
-  <RouterLink to="/home/2409fjd/main" class="homeItem">
+  <div class="homeItem">
     <div class="homeItem__image">
       <img :src="require('@/shared/assets/images/homes/home1.png')" alt="" />
     </div>
@@ -23,7 +23,11 @@
       <div class="homeItem__roms">Помещений: <strong>48</strong></div>
     </div>
     <div class="homeItem__nav">
-      <button class="homeItem__edit">
+      <Button
+        severity="secondary"
+        class="homeItem__edit"
+        @click="router.push('/home/2409fjd/main')"
+      >
         <svg
           width="18"
           height="18"
@@ -36,8 +40,8 @@
             fill="#666666"
           />
         </svg>
-      </button>
-      <button class="homeItem__copy">
+      </Button>
+      <Button severity="secondary" class="homeItem__copy">
         <svg
           width="18"
           height="18"
@@ -50,8 +54,12 @@
             fill="#666666"
           />
         </svg>
-      </button>
-      <button class="homeItem__delete">
+      </Button>
+      <Button
+        severity="secondary"
+        class="homeItem__delete"
+        @click="emits('deleteItem')"
+      >
         <svg
           width="18"
           height="18"
@@ -64,12 +72,19 @@
             fill="#666666"
           />
         </svg>
-      </button>
+      </Button>
     </div>
-  </RouterLink>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const emits = defineEmits<{
+  (e: "deleteItem"): void;
+}>();
+</script>
 
 <style scoped lang="scss">
 .homeItem {
