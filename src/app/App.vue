@@ -3,6 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import "@/app/styles/main.css";
-import "@/app/styles/primevue.scss";
+import "@/app/styles/main.scss";
 </script>

@@ -1,10 +1,9 @@
-import { ButtonContext, ButtonProps } from "primevue/button";
+import { ButtonProps } from "primevue/button";
 import { DropdownContext } from "primevue/dropdown";
 import { InputSwitchProps } from "primevue/inputswitch";
 import { InputTextContext } from "primevue/inputtext";
 import { MessageProps } from "primevue/message";
 import { SelectButtonContext } from "primevue/selectbutton";
-import { prop } from "vue-class-component";
 
 export default {
   pt: {
@@ -112,12 +111,15 @@ export default {
       root: { class: "border border-grey-400 rounded h-9 py-2 px-4" },
     },
     tabpanel: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       headerTitle: (instance: any) => ({
         class: [
-          "text-black",
-          instance.tabpanel.context.active ? "font-semibold" : "font-normal",
+          instance.tabpanel.context.active
+            ? "font-semibold text-green"
+            : "font-normal text-black",
         ],
       }),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       headerAction: (instance: any) => ({
         class: [
           instance.tabpanel.context.active ? "!border-green" : "",
@@ -132,17 +134,16 @@ export default {
     },
     message: {
       root: ({ props }: { props: MessageProps }) => {
-        console.log(props);
         return {
           class: [
-            "w-full !border-l !m-0",
+            "w-full !border !m-0",
             props.severity === "info"
               ? "!bg-blue-100 !border !border-l !border-blue-500"
               : "",
           ],
         };
       },
-      wrapper: ({ props }: { props: MessageProps }) => {
+      wrapper: () => {
         return {
           class: ["!p-3.5"],
         };

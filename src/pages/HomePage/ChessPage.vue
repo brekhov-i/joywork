@@ -46,7 +46,7 @@ import EntrancesList from "@/widgets/homePage/entranceList/entranceList.vue";
     line-height: 100%;
     display: flex;
     justify-content: flex-start;
-    align-items: end;
+    align-items: flex-end;
 
     .subtitle {
       font-size: 21px;

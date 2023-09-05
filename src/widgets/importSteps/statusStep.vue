@@ -96,14 +96,13 @@
         support@support.ru
       </template>
     </Message>
-    <div class="objectStep__btns flex flex-row">
-      <MyButton
-        :theme="'grey-icon'"
-        class="text-grey-900 mr-2.5 !px-5"
-        @click="emits('update:activeItem', 3)"
-        >Назад</MyButton
+    <div class="objectStep__btns flex flex-row gap-x-3 mt-7.5">
+      <Button severity="secondary" @click="emits('update:activeItem', 3)"
+        >Назад</Button
       >
-      <MyButton :theme="'green'" class="!px-5">Далее</MyButton>
+      <Button severity="success" @click="emits('update:activeItem', 5)"
+        >Далее</Button
+      >
     </div>
   </div>
 </template>

@@ -119,14 +119,11 @@
 </template>
 
 <script setup lang="ts">
-import { TComplex } from "@/app/types/complex";
 import MyButton from "@/shared/UI/MyButton.vue";
 import DefaultLayout from "@/shared/layouts/defaultLayout.vue";
 import FormAddHome from "@/widgets/forms/formAddHome.vue";
 import ListHome from "@/widgets/listHome.vue";
 import { ref } from "vue";
-const complexData = ref<TComplex>();
-
 const isOpenForm = ref<boolean>(false);
 </script>
 

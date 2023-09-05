@@ -3,18 +3,9 @@
     <Dialog
       v-model:visible="isVisibleDeleteAll"
       modal
+      :draggable="false"
       header="Вы уверены, что хотите удалить планировки?"
-      :pt="{
-        root: {
-          class: ['w-[50vw]'],
-        },
-        content: {
-          class: ['!p-0'],
-        },
-        headerTitle: {
-          class: ['!font-normal'],
-        },
-      }"
+      :pt="dialogStyle"
     >
       <template #footer>
         <div
@@ -49,24 +40,9 @@
       v-model:visible="isVisibleOffSide"
       @update:visible="isVisibleOffSide = false"
       modal
+      :draggable="false"
       header="Успешно отключено"
-      :pt="{
-        root: {
-          class: ['p-[50px] bg-white  w-[800px]'],
-        },
-        content: {
-          class: ['!p-0 !border-t !border-grey-400 !pt-5'],
-        },
-        header: {
-          class: ['!p-0 !pb-7.5'],
-        },
-        headerTitle: {
-          class: ['!font-normal'],
-        },
-        footer: {
-          class: ['!p-0 !pt-5'],
-        },
-      }"
+      :pt="dialogStyle"
     >
       <template #default>
         Отображение сторон света успешно отключено для выбранных планировок
@@ -83,24 +59,9 @@
       v-model:visible="isVisibleUploadPlan"
       @update:visible="isVisibleUploadPlan = false"
       modal
+      :draggable="false"
       header="Загрузка планировок Planoplan"
-      :pt="{
-        root: {
-          class: ['p-[50px] bg-white w-[800px]'],
-        },
-        content: {
-          class: ['!p-0 !border-t !border-grey-400 !pt-5'],
-        },
-        header: {
-          class: ['!p-0 !pb-7.5'],
-        },
-        headerTitle: {
-          class: ['!font-normal'],
-        },
-        footer: {
-          class: ['!p-0 !pt-5'],
-        },
-      }"
+      :pt="dialogStyle"
     >
       <template #default>
         <p class="text mb-5 text-sm">
@@ -219,7 +180,7 @@
 </template>
 
 <script setup lang="ts">
-import Dialog from "primevue/dialog";
+import Dialog, { DialogPassThroughOptions } from "primevue/dialog";
 import Button, { ButtonPassThroughOptions } from "primevue/button";
 import Menu, { MenuPassThroughOptions } from "primevue/menu";
 import PlanRoomsTable from "@/widgets/homePage/planLayout/planRoomsTable.vue";
@@ -231,6 +192,23 @@ const isVisibleDeleteAll = ref<boolean>(false);
 const isVisibleOffSide = ref<boolean>(false);
 const isVisibleUploadPlan = ref<boolean>(false);
 const urls = ref<string>("");
+const dialogStyle = ref<PTOptions<DialogPassThroughOptions>>({
+  root: {
+    class: ["p-[50px] bg-white w-[800px]"],
+  },
+  content: {
+    class: ["!p-0 !border-t !border-grey-400 !pt-5"],
+  },
+  header: {
+    class: ["!p-0 !pb-7.5"],
+  },
+  headerTitle: {
+    class: ["!font-normal"],
+  },
+  footer: {
+    class: ["!p-0 !pt-5"],
+  },
+});
 const btnActionStyle = ref<PTOptions<ButtonPassThroughOptions>>({
   root: {
     class: ["!bg-white !border !border-blue !w-max !py-2 !px-3 !text-blue"],

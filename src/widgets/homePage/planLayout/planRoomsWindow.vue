@@ -77,12 +77,11 @@
 <script setup lang="ts">
 import { ConfirmDialogPassThroughOptions } from "primevue/confirmdialog";
 import ConfirmPopup from "primevue/confirmpopup";
-import OverlayPanel from "primevue/overlaypanel";
 import { PTOptions } from "primevue/ts-helpers";
 import { useConfirm } from "primevue/useconfirm";
 import { computed, ref } from "vue";
 
-const props = defineProps<{
+defineProps<{
   isOpenEditPlanWindow: boolean;
 }>();
 const emits = defineEmits<{

@@ -8,7 +8,7 @@
     showGridlines
     table-style="min-width: 2000px"
     class="chessList"
-    @row-click="(e) => rowClick(e, data)"
+    @row-click="(e) => rowClick()"
   >
     <Column
       field="formatFile"
@@ -158,14 +158,10 @@
 </template>
 
 <script setup lang="ts">
-import DataTable, {
-  DataTablePassThroughOptions,
-  DataTableRowEditInitEvent,
-} from "primevue/datatable";
+import DataTable, { DataTablePassThroughOptions } from "primevue/datatable";
 import Column, { ColumnPassThroughOptions } from "primevue/column";
 import { ref } from "vue";
 import { PTOptions } from "primevue/ts-helpers";
-import { data } from "autoprefixer";
 
 const emits = defineEmits<{
   (e: "update:isOpenWindow", value: boolean): void;
@@ -232,7 +228,7 @@ const styleColumn = ref<PTOptions<ColumnPassThroughOptions>>({
   },
 });
 
-const rowClick = (originalEvent: DataTableRowEditInitEvent, data: any) => {
+const rowClick = () => {
   isOpenWindow.value = !isOpenWindow.value;
   emits("update:isOpenWindow", isOpenWindow.value);
 };

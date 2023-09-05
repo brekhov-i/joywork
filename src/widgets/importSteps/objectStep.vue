@@ -1,7 +1,12 @@
 <template>
   <div class="objectStep">
-    <div class="objectStep__title"></div>
-    <div class="objectStep__desc"></div>
+    <div class="objectStep__title mb-5 text-xl">
+      Связь дома с объектом из файла
+    </div>
+    <div class="objectStep__desc mb-7.5 text-sm">
+      Выберите дом связанный с объектами из файла. Если это новый дом,
+      воспользуйтесь ссылкой «Создать дом»
+    </div>
     <div class="grid grid-cols-[repeat(2,_1fr)] gap-x-12.5 mb-16">
       <div class="homeFromFile w-full">
         <div class="homeFromFile__title font-bold mb-5">
@@ -13,7 +18,7 @@
           <InputSwitch id="isImport" v-model="isImport" />
         </div>
       </div>
-      <div class="homeFromJW">
+      <div class="homeFromJW flex flex-col">
         <div class="homeFromJW__title mb-5 font-bold">Дома в JoyWork</div>
         <Dropdown
           v-model="homeFromSystem"
@@ -105,7 +110,11 @@
             </div>
           </template>
         </Dropdown>
-        <button class="addHome flex items-center gap-x-2 mt-5">
+        <Button
+          class="addHome flex items-center gap-x-2 mt-5 !text-black !px-0"
+          text
+          plain
+        >
           <svg
             width="18"
             height="18"
@@ -119,14 +128,10 @@
             />
           </svg>
           Создать дом
-        </button>
+        </Button>
       </div>
     </div>
-    <Message
-      :closable="false"
-      severity="info"
-      :pt="{ root: { class: ['!bg-blue-100 !border-blue-500'] } }"
-    >
+    <Message :closable="false" severity="info">
       <template #messageicon>
         <svg
           width="18"
@@ -148,24 +153,23 @@
         support@support.ru
       </template>
     </Message>
-    <div class="objectStep__btns flex flex-row">
-      <MyButton
-        :theme="'grey-icon'"
-        class="text-grey-900 mr-2.5 !px-5"
-        @click="emits('update:activeItem', 1)"
-        >Назад</MyButton
+    <div class="objectStep__btns flex flex-row gap-x-3 mt-7.5">
+      <Button severity="secondary" @click="emits('update:activeItem', 1)"
+        >Назад</Button
       >
-      <MyButton
-        :theme="'green'"
-        class="!px-5"
-        @click="emits('update:activeItem', 3)"
-        >Далее</MyButton
+      <Button severity="success" @click="emits('update:activeItem', 3)"
+        >Далее</Button
       >
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import Dropdown from "primevue/dropdown";
+import Button from "primevue/button";
+import Message from "primevue/message";
+import InputSwitch from "primevue/inputswitch";
+import InputText from "primevue/inputtext";
 import { ref } from "vue";
 
 const emits = defineEmits<{
@@ -188,4 +192,4 @@ const homes = ref([
 ]);
 </script>
 
-<style scoped></style>
+<style scoped lang="scss"></style>

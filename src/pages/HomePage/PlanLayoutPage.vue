@@ -17,9 +17,6 @@
 
 <script setup lang="ts">
 import PlanRooms from "@/widgets/homePage/planLayout/planRooms.vue";
-import { ref } from "vue";
-
-const activePage = ref("planRooms");
 </script>
 
 <style scoped lang="scss">

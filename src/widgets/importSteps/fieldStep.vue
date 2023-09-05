@@ -65,7 +65,7 @@
           Перейдите к настройке полей таблицы.
         </template>
       </Message>
-      <div class="fieldStep__title">Сопоставление полей</div>
+      <div class="fieldStep__title text-xl my-7.5">Сопоставление полей</div>
       <Message
         :closable="false"
         severity="info"
@@ -92,12 +92,18 @@
           обязательные для заполнения.
         </template>
       </Message>
-      <div class="fieldStep__tables">
+      <div class="fieldStep__tables my-7.5">
+        <div class="table__title mb-7.5 text-lg">
+          Предпросмотр загруженного файла
+        </div>
         <TableFromFile
           :data="tableDataFromFile"
           class="mb-10"
           @onDrop="onDrop($event)"
         />
+        <div class="table__title mb-7.5 text-lg">
+          Предпросмотр загруженного файла
+        </div>
         <TableEditeble :data="tableEditebleData" @onDrop="onDrop($event)" />
       </div>
       <Message
@@ -126,18 +132,12 @@
           support@support.ru
         </template>
       </Message>
-      <div class="fieldStep__btns flex flex-row">
-        <MyButton
-          :theme="'grey-icon'"
-          class="text-grey-900 mr-2.5 !px-5"
-          @click="emits('update:activeItem', 0)"
-          >Назад</MyButton
+      <div class="fieldStep__btns flex flex-row gap-x-3 mt-7.5">
+        <Button severity="secondary" @click="emits('update:activeItem', 0)"
+          >Назад</Button
         >
-        <MyButton
-          :theme="'green'"
-          class="!px-5"
-          @click="emits('update:activeItem', 2)"
-          >Далее</MyButton
+        <Button severity="success" @click="emits('update:activeItem', 2)"
+          >Далее</Button
         >
       </div>
     </div>
@@ -275,6 +275,7 @@ const onDrop = (event: DragEvent) => {
   }
 
   &__title {
+    font-size: 21px;
     font-weight: 500;
     margin-bottom: 14px;
   }
