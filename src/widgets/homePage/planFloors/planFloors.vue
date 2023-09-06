@@ -1,11 +1,12 @@
 <template>
-  <div class="planRooms w-full">
+  <div class="planFloors">
     <Dialog
       v-model:visible="isVisibleDeleteAll"
       modal
       :draggable="false"
       header="Вы уверены, что хотите удалить планировки?"
       :pt="dialogStyle"
+      contentClass="!p-0 hidden"
     >
       <template #footer>
         <div
@@ -43,12 +44,13 @@
       :draggable="false"
       header="Успешно отключено"
       :pt="dialogStyle"
+      contentClass="!p-0 !pt-5"
     >
       <template #default>
         Отображение сторон света успешно отключено для выбранных планировок
       </template>
       <template #footer>
-        <div class="btns w-full flex justify-between">
+        <div class="btns w-full flex justify-between mt-5">
           <Button severity="info" @click="isVisibleOffSide = false">
             Ок
           </Button>
@@ -95,6 +97,10 @@
         </div>
       </template>
     </Dialog>
+    <EditSideWindow
+      :visibleEditSideWindow="isVisibleEditSideWindow"
+      @update:isVisibleEditSideWindow="isVisibleEditSideWindow = false"
+    />
     <Message severity="info" :closable="false">
       <template #messageicon>
         <svg
@@ -120,7 +126,7 @@
       >
     </Message>
     <div class="planRooms__btns flex items-center gap-x-7.5 my-7.5">
-      <MyButton :theme="'green'">
+      <Button severity="success">
         <svg
           width="18"
           height="18"
@@ -134,11 +140,8 @@
             fill="white"
           />
         </svg>
-        Выбрать планировки помещений
-      </MyButton>
-      <MyButton :theme="'green'" @click="isVisibleUploadPlan = true">
-        Загрузить 3D-планировки
-      </MyButton>
+        Выбрать планировки этажей
+      </Button>
       <Button
         type="button"
         @click="toggle"
@@ -175,29 +178,30 @@
         :pt="menuStyle"
       />
     </div>
-    <PlanRoomsTable />
+    <PlanFloorTable />
   </div>
 </template>
 
 <script setup lang="ts">
+import Menu, { MenuPassThroughOptions } from "primevue/menu";
 import Dialog, { DialogPassThroughOptions } from "primevue/dialog";
 import Button, { ButtonPassThroughOptions } from "primevue/button";
-import Menu, { MenuPassThroughOptions } from "primevue/menu";
-import PlanRoomsTable from "@/widgets/homePage/planLayout/planRoomsTable.vue";
-import MyButton from "@/shared/UI/MyButton.vue";
+import PlanFloorTable from "@/widgets/homePage/planFloors/planFloorTable.vue";
 import { ref } from "vue";
 import { PTOptions } from "primevue/ts-helpers";
+import EditSideWindow from "./editSideWindow.vue";
 
 const isVisibleDeleteAll = ref<boolean>(false);
 const isVisibleOffSide = ref<boolean>(false);
 const isVisibleUploadPlan = ref<boolean>(false);
+const isVisibleEditSideWindow = ref<boolean>(false);
 const urls = ref<string>("");
 const dialogStyle = ref<PTOptions<DialogPassThroughOptions>>({
   root: {
     class: ["p-[50px] bg-white w-[800px]"],
   },
   content: {
-    class: ["!p-0 !border-t !border-grey-400 !pt-5"],
+    class: ["!border-t !border-grey-400"],
   },
   header: {
     class: ["!p-0 !pb-7.5"],
@@ -206,7 +210,7 @@ const dialogStyle = ref<PTOptions<DialogPassThroughOptions>>({
     class: ["!font-normal"],
   },
   footer: {
-    class: ["!p-0 !pt-5"],
+    class: ["!p-0"],
   },
 });
 const btnActionStyle = ref<PTOptions<ButtonPassThroughOptions>>({
@@ -235,7 +239,7 @@ const menuActionsItems = ref([
   {
     label: "Редактировать стороны света",
     command: () => {
-      console.log("Редактировать стороны света");
+      isVisibleEditSideWindow.value = true;
     },
   },
   {
@@ -257,4 +261,4 @@ const toggle = (event: Event) => {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

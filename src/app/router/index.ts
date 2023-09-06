@@ -43,6 +43,11 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: "/floors/:id",
+    name: "floors",
+    component: () => import("@/pages/EditPlanFloors.vue"),
+  },
 ];
 
 const router = createRouter({

@@ -19,6 +19,9 @@ import Tooltip from "primevue/tooltip";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Button from "primevue/button";
+import TabView from "primevue/tabview";
+import TabPanel from "primevue/tabpanel";
+import Dialog from "primevue/dialog";
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -34,6 +37,9 @@ app.component("DataTable", DataTable);
 app.component("Column", Column);
 app.component("Button", Button);
 app.component("MyButton", MyButton);
+app.component("TabView", TabView);
+app.component("TabPanel", TabPanel);
+app.component("Dialog", Dialog);
 
 app.directive("tooltip", Tooltip);
 
