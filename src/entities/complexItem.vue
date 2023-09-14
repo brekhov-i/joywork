@@ -96,7 +96,6 @@ const change = computed<string>(() => {
   grid-template-columns: vw(300, 1920) 1fr;
   @apply bg-white;
   overflow: hidden;
-  border-radius: 4px;
 
   &.medium {
     width: 100%;

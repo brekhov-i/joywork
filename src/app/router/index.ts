@@ -48,6 +48,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "floors",
     component: () => import("@/pages/EditPlanFloors.vue"),
   },
+  {
+    path: "/facades/:id",
+    name: "facades",
+    component: () => import("@/pages/EditFacades.vue"),
+  },
 ];
 
 const router = createRouter({
