@@ -14,7 +14,7 @@
     <template #default>
       <div class="items grid grid-cols-5 gap-7.5">
         <div
-          class="itemPlan"
+          class="itemPlan hover:!bg-grey-200"
           v-for="index in 20"
           :key="`itemPlan` + index"
           @click="
@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs } from "vue";
+import { toRefs } from "vue";
 
 const props = defineProps<{
   visibleWindow: boolean;

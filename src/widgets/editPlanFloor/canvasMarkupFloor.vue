@@ -118,7 +118,7 @@ const showTemplate = (event: Event) => {
   confirm.require({
     target: event.currentTarget as HTMLElement,
     group: "deletePlan",
-    message: "Удалить планировку?",
+    message: "Удалить область?",
     acceptLabel: "Да",
     rejectLabel: "Нет",
     acceptClass: "!bg-red !shadow-none",
