@@ -14,3 +14,9 @@
 @include font-face("Lato", "Lato-Light", 300, "normal");
 @include font-face("Lato", "Lato-ExtraLight", 200, "normal");
 @include font-face("Lato", "Lato-Thin", 100, "normal");
+
+html {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}

@@ -86,7 +86,11 @@
         <div class="item__title">Планировки этажей</div>
         <div class="item__fullness">Заполнение 100%</div>
         <div class="item__bts flex flex-row">
-          <MyButton :theme="'grey-icon'" class="!w-max text-sm text-grey-900">
+          <MyButton
+            :theme="'grey-icon'"
+            class="!w-max text-sm text-grey-900"
+            @click="router.push('/home/2409fjd/planLayout/#floors')"
+          >
             <svg
               width="18"
               height="18"
@@ -115,7 +119,11 @@
         <div class="item__title">Фасады</div>
         <div class="item__fullness">Заполнение 100%</div>
         <div class="item__btns flex flex-row">
-          <MyButton :theme="'grey-icon'" class="!w-max text-sm text-grey-900">
+          <MyButton
+            :theme="'grey-icon'"
+            class="!w-max text-sm text-grey-900"
+            @click="router.push('/facades/1243')"
+          >
             <svg
               width="18"
               height="18"

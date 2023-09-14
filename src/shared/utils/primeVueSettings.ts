@@ -168,9 +168,9 @@ export default {
       }),
       button: ({ context }: { context: SelectButtonContext }) => ({
         class: [
-          "!border-r !border-solid !rounded focus:!shadow-none  h-full",
-          "2xl:!py-2.5 2xl:!px-2.5 xl:!py-1.5 xl:!px-2.5",
-          context.active ? "!bg-green !border-green" : "!border-grey-400",
+          "border-r border-solid !rounded focus:!shadow-none  h-full",
+          "2xl:py-2.5 2xl:px-2.5 xl:py-1.5 xl:px-2.5",
+          context.active ? "bg-green border-green" : "border-grey-400",
         ],
       }),
       label: ({ context }: { context: SelectButtonContext }) => ({
@@ -185,7 +185,7 @@ export default {
       root: ({ props }: { props: ButtonProps }) => {
         return {
           class: [
-            "!py-2 !px-3 rounded ",
+            "rounded ",
             props?.severity === "success"
               ? "!bg-green !text-white !shadow-none"
               : props?.severity === "danger"
@@ -196,6 +196,7 @@ export default {
               ? "!bg-gradient-to-r !from-[#FEFEFE] !to-[#F6F6F6] !border !border-grey-400 !text-grey-900 !shadow-none"
               : "!border-0",
             props.link ? "!bg-transparent !text-green" : "",
+            props.text ? "!p-0" : "!py-2 !px-3",
           ],
         };
       },

@@ -3,20 +3,30 @@
     <div class="titlePage planLayoutPage__title">
       Тестовый ЖК Невский — Тестовый дом
     </div>
-    <div class="tabWidget">
-      <div class="tabWidget__nav">
-        <button class="nav__item active">Планировка помещений</button>
-        <button class="nav__item">Планировка этажей</button>
-      </div>
-      <div class="tabWidget__content w-full">
+    <TabView class="w-full" :active-index="activeIndex">
+      <TabPanel header="Планировка помещений">
         <PlanRooms />
-      </div>
-    </div>
+      </TabPanel>
+      <TabPanel header="Планировка этажей">
+        <PlanFloors />
+      </TabPanel>
+    </TabView>
   </div>
 </template>
 
 <script setup lang="ts">
 import PlanRooms from "@/widgets/homePage/planLayout/planRooms.vue";
+import PlanFloors from "@/widgets/homePage/planFloors/planFloors.vue";
+import { useRoute } from "vue-router";
+import { onMounted, ref } from "vue";
+
+const route = useRoute();
+const activeIndex = ref<number>(0);
+
+onMounted(() => {
+  if (route.hash && route.hash.split("#")[1] === "floors")
+    activeIndex.value = 1;
+});
 </script>
 
 <style scoped lang="scss">
