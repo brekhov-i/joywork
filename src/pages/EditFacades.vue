@@ -231,7 +231,7 @@ const showTemplate = (event: MouseEvent, id: string) => {
   confirm.require({
     target: event.currentTarget as HTMLElement,
     group: "deletePlan",
-    message: "Удалить планировку?",
+    message: "Удалить фасад?",
     acceptLabel: "Да",
     rejectLabel: "Нет",
     acceptClass: "!bg-red !shadow-none",

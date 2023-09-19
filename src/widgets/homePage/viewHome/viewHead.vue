@@ -1,61 +1,19 @@
 <template>
   <div
-    class="viewHome__head flex flex-col w-full z-10"
+    class="viewHome__head flex flex-col w-full z-10 pt-5"
     :class="[
-      filters.view?.value === 'facades'
-        ? 'absolute px-[100px] pt-[23px] top-0'
-        : 'relative bg-white mb-7.5',
+      'relative bg-white mb-7.5',
+      filters.view.value === 'facades' ? 'px-[30px]' : '',
     ]"
   >
-    <div
-      class="viewHome__title text-[32px]"
-      v-if="filters.view?.value !== 'facades'"
-    >
-      Просмотр объекта
-    </div>
+    <div class="viewHome__title text-[32px]">Просмотр объекта</div>
     <div class="head__top flex flex-row w-full items-center mb-7.5">
-      <button
-        :class="[
-          'viewHome__btnOpenFilters',
-          'flex flex-row gap-x-2.5 border border-grey-400 w-max p-2 rounded z-20',
-          isOpenFiltersMenu
-            ? 'bg-green text-white fill-white'
-            : 'text-black bg-gradient-to-t from-[#FEFEFE] to-[#F6F6F6] fill-green',
-          filters.view?.value !== 'facades' ? 'hidden' : '',
-        ]"
-        @click="isOpenFiltersMenu = !isOpenFiltersMenu"
-      >
-        <svg
-          width="20"
-          height="21"
-          viewBox="0 0 20 21"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M9.99967 3.625C9.42434 3.625 8.95801 4.09137 8.95801 4.66667C8.95801 5.24197 9.42434 5.70833 9.99967 5.70833C10.575 5.70833 11.0413 5.24197 11.0413 4.66667C11.0413 4.09137 10.575 3.625 9.99967 3.625ZM7.79427 4.04167C8.06632 3.07979 8.95067 2.375 9.99967 2.375C11.0487 2.375 11.933 3.07979 12.2051 4.04167H16.6663C17.0115 4.04167 17.2913 4.32149 17.2913 4.66667C17.2913 5.01184 17.0115 5.29167 16.6663 5.29167H12.2051C11.933 6.25354 11.0487 6.95833 9.99967 6.95833C8.95067 6.95833 8.06632 6.25354 7.79427 5.29167H3.33301C2.98783 5.29167 2.70801 5.01184 2.70801 4.66667C2.70801 4.32149 2.98783 4.04167 3.33301 4.04167H7.79427ZM14.9997 9.45833C14.4243 9.45833 13.958 9.92467 13.958 10.5C13.958 11.0753 14.4243 11.5417 14.9997 11.5417C15.575 11.5417 16.0413 11.0753 16.0413 10.5C16.0413 9.92467 15.575 9.45833 14.9997 9.45833ZM12.7943 9.875C13.0663 8.91308 13.9507 8.20833 14.9997 8.20833C16.2653 8.20833 17.2913 9.23433 17.2913 10.5C17.2913 11.7657 16.2653 12.7917 14.9997 12.7917C13.9507 12.7917 13.0663 12.0869 12.7943 11.125H3.33301C2.98783 11.125 2.70801 10.8452 2.70801 10.5C2.70801 10.1548 2.98783 9.875 3.33301 9.875H12.7943ZM4.99967 15.2917C4.42437 15.2917 3.95801 15.758 3.95801 16.3333C3.95801 16.9087 4.42437 17.375 4.99967 17.375C5.57497 17.375 6.04134 16.9087 6.04134 16.3333C6.04134 15.758 5.57497 15.2917 4.99967 15.2917ZM2.70801 16.3333C2.70801 15.0677 3.73402 14.0417 4.99967 14.0417C6.04866 14.0417 6.93302 14.7464 7.20507 15.7083H16.6663C17.0115 15.7083 17.2913 15.9882 17.2913 16.3333C17.2913 16.6785 17.0115 16.9583 16.6663 16.9583H7.20507C6.93302 17.9202 6.04866 18.625 4.99967 18.625C3.73402 18.625 2.70801 17.599 2.70801 16.3333Z"
-          />
-        </svg>
-
-        Фильтры
-      </button>
-      <FilterWidget
-        :filters="filters"
-        :viewGrid="filters.view?.value"
-        :isOpen="isOpenFiltersMenu"
-        @update:filters="updateFilter($event)"
-      />
-      <div
-        class="filters__view flex flex-col ml-auto z-20"
-        :class="filters.view?.value !== 'facades' ? 'self-start' : ''"
-      >
+      <FilterWidget :filters="filters" @update:filters="updateFilter($event)" />
+      <div class="filters__view flex flex-col ml-auto z-20 self-start">
         <label
           class="mb-2"
           :class="[
-            filters.view?.value === 'facades' && !isOpenFiltersMenu
-              ? 'text-white'
-              : 'text-grey-900',
+            filters.view?.value === 'facades' ? 'text-white' : 'text-grey-900',
           ]"
           >Вид</label
         >
@@ -128,15 +86,6 @@
       </div>
     </div>
     <div
-      class="head__foundText"
-      :class="
-        filters.view?.value === 'facades' ? 'text-white font-700' : 'text-black'
-      "
-    >
-      Найдено 500 помещений. Из них свободно:
-      <span class="text-green">500</span>.
-    </div>
-    <div
       class="table__infoBlock w-full flex flex-row items-center bg-grey-100 py-2.5 2xl:px-[97px] xl:px-[50px] 2xl:gap-x-12.5 xl:gap-x-10 mt-7.5"
       :class="[filters.view?.value === 'facades' ? 'hidden' : '']"
     >
@@ -197,6 +146,7 @@
             : 'bg-white text-black',
           'px-4 py-2.5 rounded-3xl shadow-[2px_4px_4px_0px_rgba(0,_0,_0,_0.25)]',
         ]"
+        @click="viewFacadesSaid = 'park'"
       >
         Вид со стороны парка
       </button>
@@ -207,6 +157,7 @@
             : 'bg-white text-black',
           'px-4 py-2.5 rounded-3xl shadow-[2px_4px_4px_0px_rgba(0,_0,_0,_0.25)]',
         ]"
+        @click="viewFacadesSaid = 'left'"
       >
         Вид со стороны парка
       </button>
@@ -222,6 +173,7 @@ import { ref, watch } from "vue";
 const emits = defineEmits<{
   (e: "update:isOpenFiltersMenu", value: boolean): void;
   (e: "update:filters", value: IFilters): void;
+  (e: "update:viewType", value: string): void;
 }>();
 
 const viewFacadesSaid = ref<string>("park");
@@ -292,6 +244,9 @@ watch(
   },
   { deep: true }
 );
+watch(viewFacadesSaid, (newV) => {
+  emits("update:viewType", newV);
+});
 </script>
 
 <style scoped></style>

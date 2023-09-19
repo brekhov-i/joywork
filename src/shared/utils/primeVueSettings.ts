@@ -168,9 +168,9 @@ export default {
       }),
       button: ({ context }: { context: SelectButtonContext }) => ({
         class: [
-          "border-r border-solid !rounded focus:!shadow-none  h-full",
+          "!border-r !border-solid !rounded focus:!shadow-none  h-full",
           "2xl:py-2.5 2xl:px-2.5 xl:py-1.5 xl:px-2.5",
-          context.active ? "bg-green border-green" : "border-grey-400",
+          context.active ? "!bg-green !border-green" : "!border-grey-400",
         ],
       }),
       label: ({ context }: { context: SelectButtonContext }) => ({

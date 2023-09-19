@@ -1,14 +1,7 @@
 <template>
-  <div
-    class="filters viewHome__filters flex flex-col w-max bg-white"
-    :class="[
-      props.viewGrid === 'facades' ? 'filters--facades px-[100px]' : '',
-      props.isOpen ? 'open' : '',
-    ]"
-  >
+  <div class="filters viewHome__filters flex flex-col w-max bg-white">
     <div
       class="filters__content flex flex-row flex-wrap items-stretch gap-x-[80px] xl:gap-x-[50px] xl:gap-y-[20px] w-full pt-3.5"
-      :class="[props.viewGrid === 'facades' ? 'border-t border-grey-400' : '']"
     >
       <div
         class="filters__roms flex flex-col justify-start items-start h-full w-max"
@@ -94,14 +87,12 @@
       <button
         class="btnClearFilters bg-white border border-red text-sm px-4 py-2.5 text-red rounded-[30px] h-max self-end"
         @click="clearFilters()"
+        v-if="!isEmpty"
       >
         Очистить фильтры
       </button>
     </div>
-    <div
-      class="head__foundText text-black mt-7.5"
-      :class="props.viewGrid !== 'facades' ? 'hidden' : ''"
-    >
+    <div class="head__foundText text-black mt-7.5">
       Найдено 500 помещений. Из них свободно:
       <span class="text-green">500</span>.
     </div>
@@ -114,16 +105,48 @@ import { ref, watch } from "vue";
 import { IFilters } from "./types";
 import { IRoom } from "./types";
 
-const props = defineProps<{
-  viewGrid: string | undefined;
-  isOpen: boolean;
-}>();
-
 const emits = defineEmits<{
   (e: "update:filters", value: IFilters): void;
 }>();
 
 const filters = ref<IFilters>({
+  rooms: [],
+  price: {
+    min: "",
+    max: "",
+  },
+  square: {
+    min: "",
+    max: "",
+  },
+  hiddenPrice: false,
+  onlyFree: false,
+});
+
+const isEmpty = ref<boolean>(true);
+
+const checkEmptyFilters = () => {
+  console.log(filters.value);
+  const entries1 = Object.entries(filters.value);
+  const entries2 = Object.entries(filterClear.value);
+  if (entries1.length !== entries2.length) {
+    isEmpty.value = false;
+  }
+  for (let i = 0; i < entries1.length; ++i) {
+    // Ключи
+    if (entries1[i][0] !== entries2[i][0]) {
+      isEmpty.value = false;
+    }
+    // Значения
+    if (entries1[i][1] !== entries2[i][1]) {
+      isEmpty.value = false;
+    }
+  }
+
+  isEmpty.value = true;
+};
+
+const filterClear = ref<IFilters>({
   rooms: [],
   price: {
     min: "",
@@ -164,29 +187,18 @@ const typeRooms = ref<IRoom[]>([
   },
 ]);
 
-const clearFilters = () => {
-  filters.value = {
-    rooms: [],
-    price: {
-      min: "",
-      max: "",
-    },
-    square: {
-      min: "",
-      max: "",
-    },
-    hiddenPrice: false,
-    onlyFree: false,
-  };
-};
-
 watch(
   filters,
   (newV) => {
+    checkEmptyFilters();
     emits("update:filters", newV);
   },
   { deep: true }
 );
+
+const clearFilters = () => {
+  filters.value = filterClear.value;
+};
 </script>
 
 <style scoped lang="scss">

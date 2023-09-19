@@ -102,10 +102,14 @@ const formAddComplexOpen = ref<boolean>(false);
   }
 
   main {
+    position: relative;
     height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
     padding: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 }
 </style>

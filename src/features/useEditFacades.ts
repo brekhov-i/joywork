@@ -15,6 +15,7 @@ import { getCenter } from "ol/extent";
 import { Projection } from "ol/proj";
 import Overlay from "ol/Overlay";
 import OlModify from "ol/interaction/Modify";
+import { defaults as DefaultInteractions } from "ol/interaction/defaults";
 import { shiftKeyOnly, singleClick } from "ol/events/condition";
 import OlSelect from "ol/interaction/Select";
 import OlDraw, { DrawEvent } from "ol/interaction/Draw";

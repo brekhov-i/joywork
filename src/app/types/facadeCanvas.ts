@@ -71,9 +71,18 @@ export type TOlMap = {
   createVector: () => VectorLayer<VectorSource>;
   createSourceVector: () => VectorSource;
   createStyle: () => Style;
-  createView: (imageElement: HTMLImageElement) => View;
-  createProjection: (imageElement: HTMLImageElement) => Projection;
-  createImageLayer: (imageElement: HTMLImageElement) => ImageLayer<Static>;
-  createImageStatic: (imageElement: HTMLImageElement) => Static;
+  createView: (
+    imageElement: HTMLImageElement | HTMLElement,
+    target?: HTMLElement
+  ) => View;
+  createProjection: (
+    imageElement: HTMLImageElement | HTMLElement,
+    target?: HTMLElement
+  ) => Projection;
+  createImageLayer: (
+    imageElement: HTMLImageElement,
+    view?: View
+  ) => ImageLayer<Static>;
+  createImageStatic: (imageElement: HTMLImageElement, view?: View) => Static;
   createOverlay: (container: HTMLElement) => Overlay;
 };

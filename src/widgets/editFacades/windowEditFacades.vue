@@ -482,6 +482,7 @@ onMounted(() => {
         align-items: center;
         margin: 0 auto;
         margin-bottom: 20px;
+
         &-slider {
           padding: 0;
           position: relative;
@@ -489,6 +490,7 @@ onMounted(() => {
           height: 4px;
           background: #9e9e9e !important;
           z-index: 2;
+          transform: rotate(180deg);
           button {
             position: absolute;
             top: -9px;
@@ -516,7 +518,7 @@ onMounted(() => {
           left: 0;
           right: 0;
           top: 50%;
-          transform: translateY(-50%);
+          transform: rotate(180deg) translateY(50%);
           width: 100%;
           display: flex;
           justify-content: space-between;
@@ -530,6 +532,10 @@ onMounted(() => {
             background-color: rgba(76, 175, 80, 1);
             color: white;
             font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 2px;
           }
         }
       }
