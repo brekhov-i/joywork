@@ -79,18 +79,14 @@
           </svg>
           Сохранить
         </Button>
-        <Button
-          severity="secondary"
-          @click="emits('update:isOpenEditPlanWindow')"
-          >Отменить</Button
-        >
+        <Button severity="secondary" @click="cancelSelected()">Отменить</Button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { ref } from "vue";
 
 defineProps<{
   isOpenEditPlanWindow: boolean;
@@ -480,6 +476,11 @@ function addCells() {
 function removeCandidate() {
   selectedCandidate.value = [];
   closeOverlay();
+}
+
+function cancelSelected() {
+  selectedCells.value = [];
+  emits("update:isOpenEditPlanWindow");
 }
 
 function isSelected(id: number): boolean {
