@@ -164,7 +164,7 @@ import { ref } from "vue";
 import { PTOptions } from "primevue/ts-helpers";
 
 const emits = defineEmits<{
-  (e: "update:isOpenWindow", value: boolean): void;
+  (e: "update:is-open-window"): void;
 }>();
 
 const isOpenWindow = ref<boolean>(false);
@@ -230,7 +230,7 @@ const styleColumn = ref<PTOptions<ColumnPassThroughOptions>>({
 
 const rowClick = () => {
   isOpenWindow.value = !isOpenWindow.value;
-  emits("update:isOpenWindow", isOpenWindow.value);
+  emits("update:is-open-window");
 };
 </script>
 

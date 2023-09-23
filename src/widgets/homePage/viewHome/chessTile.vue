@@ -44,6 +44,7 @@
                   ? 'bg-grey-900'
                   : 'bg-grey-400',
               ]"
+              @click="emits('openWindow')"
             >
               {{ apartament.roomCount }}
             </div>
@@ -54,11 +55,12 @@
             <div
               :class="[
                 'cell cell--grid grid grid-cols-[30px_1fr] gap-y-1 gap-x-4 grid-rows-2',
-                'border border-grey-400 rounded p-2.5 w-max',
+                'border border-grey-400 rounded p-2.5 w-max cursor-pointer',
               ]"
               v-for="(apartament, apartamentIndex) in section.floors[index - 1]
                 ?.apartments"
               :key="`floor${index}apartament${apartamentIndex}`"
+              @click="emits('openWindow')"
               v-tooltip.top="{
                 value: `
                 <div class='cell__countRoom w-[24px] h-[24px] rounded-3xl bg-green flex justify-center items-center text-white text-center'>${apartament.roomCount}к</div>
@@ -149,6 +151,9 @@ type floor = {
 const props = defineProps<{
   typeView: string | undefined;
   hiddenPrice: boolean;
+}>();
+const emits = defineEmits<{
+  (e: "openWindow"): void;
 }>();
 
 const floors = ref<floor[]>([

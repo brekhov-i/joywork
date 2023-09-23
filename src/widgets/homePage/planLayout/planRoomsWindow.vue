@@ -6,11 +6,22 @@
       </div>
       <div class="planRoomsWindow__table">
         <div class="table__numberRows">
-          <div class="row" v-for="value in maxLength" :key="`row${value}`">
+          <div class="row" v-for="value in 4" :key="`row${value}`">
             <div class="cell">{{ value }}</div>
           </div>
         </div>
-        <div class="table__content">
+        <div
+          class="table__content"
+          ref="cellContainer"
+          @mousedown="mouseDownHandlerContainer($event)"
+        >
+          <div class="overlay">
+            <Button severity="info" @click="addCells()">Добавить</Button>
+            <Button severity="secondary" outlined @click="removeCandidate()"
+              >Удалить</Button
+            >
+          </div>
+          <div class="selectionBox"></div>
           <div
             class="section"
             v-for="(section, index) in sections"
@@ -18,15 +29,16 @@
           >
             <div
               class="row"
-              v-for="floorIndex in maxLength"
+              v-for="floorIndex in 4"
               :key="`floor${floorIndex}`"
             >
               <div
                 class="cell cursor-pointer"
-                :class="isSelectedApartament(appartament.id) ? '!bg-green' : ''"
                 v-for="(appartament, index) in section.floors[floorIndex - 1]"
                 :key="`apartament${index}`"
-                @click="showTemplate($event, appartament.id)"
+                :data-apartament="JSON.stringify(appartament)"
+                :class="isSelected(appartament.id) ? 'changed' : ''"
+                @mousedown="handleCellClick($event)"
               >
                 {{ appartament.rooms }}
                 <div class="overlay">
@@ -39,20 +51,19 @@
               </div>
             </div>
           </div>
-          <ConfirmPopup
-            id="confirm"
-            aria-label="popup"
-            :pt="confirmpopupStyle"
-          ></ConfirmPopup>
         </div>
         <div class="table__numberRows">
-          <div class="row" v-for="value in maxLength" :key="`row${value}`">
+          <div class="row" v-for="value in 4" :key="`row${value}`">
             <div class="cell">{{ value }}</div>
           </div>
         </div>
       </div>
       <div class="planRoomsWindow__btns">
-        <Button severity="success" class="mr-7.5" @click="saveChess()">
+        <Button
+          severity="success"
+          class="mr-7.5"
+          @click="emits('update:isOpenEditPlanWindow')"
+        >
           <svg
             width="18"
             height="18"
@@ -68,17 +79,17 @@
           </svg>
           Сохранить
         </Button>
-        <Button severity="secondary" @click="cancel()">Отменить</Button>
+        <Button
+          severity="secondary"
+          @click="emits('update:isOpenEditPlanWindow')"
+          >Отменить</Button
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ConfirmDialogPassThroughOptions } from "primevue/confirmdialog";
-import ConfirmPopup from "primevue/confirmpopup";
-import { PTOptions } from "primevue/ts-helpers";
-import { useConfirm } from "primevue/useconfirm";
 import { computed, ref } from "vue";
 
 defineProps<{
@@ -324,81 +335,157 @@ const sections = ref([
     ],
   },
 ]);
+const selectedCells = ref([]);
+const cellContainer = ref<HTMLElement>();
 
-const maxLength = computed(() => {
-  let maxLength = 0;
-  sections.value.forEach((el) => {
-    if (el.floors.length > maxLength) maxLength = el.floors.length;
-  });
+const selectedCandidate = ref([]);
+const isSelecting = ref<boolean>(false);
+const startX = ref<number>(0);
+const startY = ref<number>(0);
+const currentX = ref<number>(0);
+const currentY = ref<number>(0);
 
-  return maxLength;
-});
+const mouseDownHandlerContainer = (e: MouseEvent) => {
+  isSelecting.value = true;
+  startX.value = e.clientX;
+  startY.value = e.clientY;
+  clearSelection();
+  closeOverlay();
+  const selectionBox: HTMLElement =
+    cellContainer.value.querySelector(".selectionBox");
+  if (selectionBox) {
+    selectionBox.style.display = "block";
+    selectionBox.style.left = `${startX.value}px`;
+    selectionBox.style.top = `${startY.value}px`;
+  }
 
-const saveChess = () => {
-  emits("update:isOpenEditPlanWindow");
-};
+  function handleMouseMove(event: MouseEvent) {
+    currentX.value = event.clientX;
+    currentY.value = event.clientY;
 
-const cancel = () => {
-  emits("update:isOpenEditPlanWindow");
-};
+    const selectionBox: HTMLElement =
+      cellContainer.value.querySelector(".selectionBox");
+    if (selectionBox) {
+      selectionBox.style.width = `${Math.abs(startX.value - currentX.value)}px`;
+      selectionBox.style.height = `${Math.abs(
+        startY.value - currentY.value
+      )}px`;
+    }
 
-const selectedApartament = ref<number[]>([]);
-const confirm = useConfirm();
-const showTemplate = (event: MouseEvent, apartamentNumber: number) => {
-  confirm.require({
-    target: event.currentTarget as HTMLElement,
-    acceptLabel: "Добавить",
-    rejectLabel: "Убрать",
-    acceptClass: "!bg-blue !text-white !shadow-none",
-    rejectClass:
-      "!bg-gradient-to-r from-[#FEFEFE] to-[#F6F6F6] !text-grey-900 !m-0 !border-x !border-y !border-grey-400",
-    accept: () => {
-      selectedApartament.value.push(apartamentNumber);
-    },
-    reject: () => {
-      const id: number = selectedApartament.value.findIndex(
-        (el) => el === apartamentNumber
-      );
-      if (id >= 0) {
-        selectedApartament.value.splice(id, 1);
+    const minX = Math.min(startX.value, currentX.value);
+    const minY = Math.min(startY.value, currentY.value);
+    const maxX = Math.max(startX.value, currentX.value);
+    const maxY = Math.max(startY.value, currentY.value);
+
+    clearSelection();
+
+    const cells = document.querySelectorAll(".cell");
+
+    cells.forEach((cell) => {
+      const rect = cell.getBoundingClientRect();
+      const cellXmax = rect.left + rect.width / 2;
+      const cellYmax = rect.top + rect.height / 2;
+
+      if (
+        minY <= cellYmax &&
+        minX <= cellXmax &&
+        maxX >= cellXmax &&
+        maxY >= cellYmax
+      ) {
+        cell.classList.add("selected");
+        selectedCandidate.value.push(
+          JSON.parse(cell.getAttribute("data-apartament"))
+        );
       }
-    },
-  });
-};
-const confirmpopupStyle = ref<PTOptions<ConfirmDialogPassThroughOptions>>({
-  root: {
-    class: [
-      "!p-3.5 !shadow-none !rounded-md !border !border-solid !border-green",
-    ],
-  },
-  content: {
-    class: ["!p-0 !mb-0"],
-  },
-  message: {
-    class: ["!m-0 !text-base !font-normal"],
-  },
-  footer: {
-    class: ["!flex !flex-row-reverse !justify-center !gap-x-3 !p-0"],
-  },
-  rejectButton: {
-    class: ["!px-3 !font-normal !m-0  !font-normal"],
-    label: {
-      class: ["!font-normal"],
-    },
-  },
-  acceptButton: {
-    class: ["!px-3 !font-normal"],
-    label: {
-      class: ["!font-normal"],
-    },
-  },
-});
+    });
+  }
 
-const isSelectedApartament = (id: number) => {
-  return selectedApartament.value.findIndex((el) => el === id) >= 0
-    ? true
-    : false;
+  const handleMouseUp = (e: MouseEvent) => {
+    isSelecting.value = false;
+    const selectionBox: HTMLElement =
+      cellContainer.value.querySelector(".selectionBox");
+    if (selectionBox) {
+      selectionBox.style.display = "none";
+    }
+    if (selectedCandidate.value.length > 2) {
+      openOverlay(e);
+    }
+    if (selectedCandidate.value.length === 1) {
+      if (!isSelected(selectedCandidate.value[0].id)) {
+        selectedCells.value = [
+          ...selectedCells.value,
+          ...selectedCandidate.value,
+        ];
+        selectedCandidate.value = [];
+      } else {
+        const index = selectedCells.value.findIndex(
+          (el) => el.id === selectedCandidate.value[0].id
+        );
+        selectedCells.value.splice(index, 1);
+      }
+    }
+    cellContainer.value.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
+  };
+
+  cellContainer.value.addEventListener("mousemove", handleMouseMove);
+  document.addEventListener("mouseup", handleMouseUp);
 };
+
+function openOverlay(e: MouseEvent) {
+  const overlay: HTMLElement = cellContainer.value.querySelector(".overlay");
+  overlay.style.left = `${e.x}px`;
+  overlay.style.top = `${e.y}px`;
+  overlay.style.opacity = "1";
+  overlay.style.visibility = "visible";
+}
+
+function handleCellClick(event) {
+  const cell: HTMLElement = event.target;
+  if (!event.ctrlKey) {
+    clearSelection();
+  }
+
+  if (cell.classList.contains("selected")) {
+    const index = selectedCandidate.value.indexOf(cell);
+    if (index !== -1) {
+      selectedCandidate.value.splice(index, 1);
+    }
+    cell.classList.remove("selected");
+  } else {
+    selectedCandidate.value.push(
+      JSON.parse(cell.getAttribute("data-apartament"))
+    );
+    cell.classList.add("selected");
+  }
+}
+
+function clearSelection() {
+  selectedCandidate.value = [];
+}
+
+function closeOverlay() {
+  const overlay: HTMLElement = cellContainer.value.querySelector(".overlay");
+  overlay.style.left = `${0}px`;
+  overlay.style.top = `${0}px`;
+  overlay.style.opacity = "0";
+  overlay.style.visibility = "hidden";
+}
+
+function addCells() {
+  selectedCells.value = [...selectedCells.value, ...selectedCandidate.value];
+  selectedCandidate.value = [];
+  closeOverlay();
+}
+function removeCandidate() {
+  selectedCandidate.value = [];
+  closeOverlay();
+}
+
+function isSelected(id: number): boolean {
+  const index = selectedCells.value.findIndex((el) => el.id === id);
+  return index === -1 ? false : true;
+}
 </script>
 
 <style lang="scss">
@@ -470,6 +557,7 @@ const isSelectedApartament = (id: number) => {
       justify-content: flex-start;
       align-items: center;
       row-gap: 10px;
+      padding-top: 10px;
 
       .row {
         font-size: 14px;
@@ -491,6 +579,35 @@ const isSelectedApartament = (id: number) => {
       justify-content: space-between;
       align-items: flex-end;
       column-gap: 42px;
+      padding: 10px;
+
+      .selectionBox {
+        position: absolute;
+        background-color: rgba(52, 152, 219, 0.5);
+        border: 1px dashed #3498db;
+        z-index: 999;
+        pointer-events: none;
+        display: none;
+      }
+
+      .overlay {
+        position: absolute;
+        width: auto;
+        height: auto;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid;
+        @apply border-green;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.5s all ease-in-out;
+        z-index: 2;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        column-gap: 10px;
+      }
 
       .section {
         width: auto;
@@ -519,6 +636,7 @@ const isSelectedApartament = (id: number) => {
             padding: 4px 12px;
             border-radius: 4px;
             font-size: 14px;
+            user-select: none;
 
             &:hover {
               .overlay {
@@ -526,6 +644,10 @@ const isSelectedApartament = (id: number) => {
                 visibility: visible;
                 transition: 0.3s all ease-in-out;
               }
+            }
+
+            &.selected {
+              @apply bg-green;
             }
 
             .overlay {

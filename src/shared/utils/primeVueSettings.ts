@@ -1,12 +1,34 @@
 import { ButtonProps } from "primevue/button";
+import { CalendarPassThroughOptions } from "primevue/calendar";
 import { DropdownContext } from "primevue/dropdown";
 import { InputSwitchProps } from "primevue/inputswitch";
 import { InputTextContext } from "primevue/inputtext";
 import { MessageProps } from "primevue/message";
 import { SelectButtonContext } from "primevue/selectbutton";
+import { PTOptions } from "primevue/ts-helpers";
 
 export default {
   pt: {
+    button: {
+      root: ({ props }: { props: ButtonProps }) => {
+        return {
+          class: [
+            "rounded ",
+            props?.severity === "success"
+              ? "!bg-green !text-white !shadow-none"
+              : props?.severity === "danger"
+              ? "!bg-red"
+              : props?.severity === "info"
+              ? "!border !border-blue"
+              : props?.severity === "secondary"
+              ? "!bg-gradient-to-r !from-[#FEFEFE] !to-[#F6F6F6] !border !border-grey-400 !text-grey-900 !shadow-none"
+              : "",
+            props.link ? "!bg-transparent !text-green" : "",
+            props.text ? "!p-0" : "!py-2 !px-3",
+          ],
+        };
+      },
+    },
     inputText: {
       root: ({ context }: { context: InputTextContext }) => {
         return {
@@ -32,28 +54,6 @@ export default {
             props.modelValue ? "!bg-green" : "!bg-grey-400",
           ],
         };
-      },
-    },
-    calendar: {
-      input: {
-        class: [
-          "!border-r-0 !border-grey-400 hover:!border-grey-400 focus:!shadow-none h-9 !rounded-s-md !rounded-e-none",
-        ],
-      },
-      timePicker: {
-        class: "bg-white text-grey-900 h-max",
-      },
-      container: {
-        class: "h-max",
-      },
-      dropdownButton: {
-        root: {
-          class: ["!bg-white !border-1 !border-l-0 !border-grey-400 h-9"],
-        },
-      },
-      hourPicker: {},
-      separatorContainer: {
-        class: "mx-4",
       },
     },
     dropdown: {
@@ -181,25 +181,28 @@ export default {
         ],
       }),
     },
-    button: {
-      root: ({ props }: { props: ButtonProps }) => {
-        return {
-          class: [
-            "rounded ",
-            props?.severity === "success"
-              ? "!bg-green !text-white !shadow-none"
-              : props?.severity === "danger"
-              ? "!bg-red"
-              : props?.severity === "info"
-              ? "!border !border-blue"
-              : props?.severity === "secondary"
-              ? "!bg-gradient-to-r !from-[#FEFEFE] !to-[#F6F6F6] !border !border-grey-400 !text-grey-900 !shadow-none"
-              : "!border-0",
-            props.link ? "!bg-transparent !text-green" : "",
-            props.text ? "!p-0" : "!py-2 !px-3",
-          ],
-        };
+
+    calendar: {
+      input: {
+        class: [
+          "!border-r-0 !border-grey-400 hover:!border-grey-400 focus:!shadow-none h-9 !rounded-s-md !rounded-e-none",
+        ],
       },
-    },
+      timePicker: {
+        class: "bg-white text-grey-900 h-max",
+      },
+      container: {
+        class: "h-max",
+      },
+      dropdownButton: {
+        root: {
+          class: ["!bg-white !border-1 !border-l-0 !border-grey-400 h-9"],
+        },
+      },
+      hourPicker: {},
+      separatorContainer: {
+        class: "mx-4",
+      },
+    } as PTOptions<CalendarPassThroughOptions>,
   },
 };

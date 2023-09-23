@@ -97,7 +97,10 @@
         </div>
       </template>
     </Dropdown>
-    <MyButton :theme="'green'" class="!w-max !rounded-2xl mx-auto !px-5"
+    <MyButton
+      :theme="'green'"
+      class="!w-max !rounded-2xl mx-auto !px-5"
+      @click="emits('openWindow')"
       >Подробнее</MyButton
     >
   </div>
@@ -144,6 +147,10 @@ const apartaments = ref([
     numberApartament: 100,
   },
 ]);
+
+const emits = defineEmits<{
+  (e: "openWindow"): void;
+}>();
 </script>
 
 <style scoped lang="scss">

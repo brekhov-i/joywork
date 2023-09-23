@@ -718,7 +718,9 @@
       </form>
     </template>
     <template v-slot:formBtns>
-      <MyButton class="submit" :theme="'green'">Сохранить</MyButton>
+      <MyButton class="submit mt-5 ml-auto" :theme="'green'"
+        >Сохранить</MyButton
+      >
     </template>
   </FormLayout>
 </template>

@@ -49,7 +49,10 @@
         class="w-full"
       />
       <div class="points absolute w-full h-full top-0 left-0">
-        <div class="point absolute bottom-[400px] left-[80px] z-10">
+        <div
+          class="point absolute bottom-[400px] left-[80px] z-10"
+          @click="emits('update:is-open-window')"
+        >
           <div class="point__countRoom">2к</div>
           <div class="point__number">№99</div>
           <div class="point__price">1 250 000 руб.</div>
@@ -57,7 +60,10 @@
             153,6 м2 <span>- 56 450 руб./м2</span>
           </div>
         </div>
-        <div class="point absolute bottom-[540px] left-[180px]">
+        <div
+          class="point absolute bottom-[540px] left-[180px]"
+          @click="emits('update:is-open-window')"
+        >
           <div class="point__countRoom">2к</div>
           <div class="point__number">№99</div>
           <div class="point__price">1 250 000 руб.</div>
@@ -65,7 +71,10 @@
             153,6 м2 <span>- 56 450 руб./м2</span>
           </div>
         </div>
-        <div class="point absolute bottom-[430px] left-[180px]">
+        <div
+          class="point absolute bottom-[430px] left-[180px]"
+          @click="emits('update:is-open-window')"
+        >
           <div class="point__countRoom">2к</div>
           <div class="point__number">№99</div>
           <div class="point__price">1 250 000 руб.</div>
@@ -84,6 +93,7 @@ import { ref } from "vue";
 const emits = defineEmits<{
   (e: "update:activeFloor", value: number): void;
   (e: "update:viewGrid"): void;
+  (e: "update:is-open-window"): void;
 }>();
 const activeFloor = ref<number>(22);
 </script>

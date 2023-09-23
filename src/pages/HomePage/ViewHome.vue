@@ -4,10 +4,13 @@
     :class="[filters.view?.value !== 'facades' ? 'px-7.5 py-5' : '']"
     ref="viewHome"
   >
-    <WindowInfoForList
-      :isOpen="isOpenWindow"
-      @update:is-open="isOpenWindow = !isOpenWindow"
-    />
+    <teleport to="body">
+      <WindowInfoForList
+        :isOpen="isOpenWindow"
+        @update:is-open="isOpenWindow = false"
+      />
+    </teleport>
+
     <ViewHead
       @update:isOpenFiltersMenu="isOpenFiltersMenu = $event"
       @update:filters="filters = $event"
@@ -18,16 +21,23 @@
         :typeView="filters.view?.value"
         :hidden-price="filters.hiddenPrice"
         v-if="filters.view?.value === 'tile' || filters.view?.value === 'grid'"
+        @openWindow="isOpenWindow = true"
       />
-      <ChessLayouts v-if="filters.view?.value === 'layouts'" />
-      <ChessFloors v-if="filters.view?.value === 'floors'" />
+      <ChessLayouts
+        v-if="filters.view?.value === 'layouts'"
+        @update:is-open-window="isOpenWindow = true"
+      />
+      <ChessFloors
+        v-if="filters.view?.value === 'floors'"
+        @update:is-open-window="isOpenWindow = true"
+      />
       <ChessFacade
         v-if="filters.view?.value === 'facades'"
         :view-type="viewType"
       />
       <ChessList
         v-if="filters.view?.value === 'list'"
-        @update:is-open-window="isOpenWindow = !isOpenWindow"
+        @update:is-open-window="isOpenWindow = true"
       />
     </div>
   </div>

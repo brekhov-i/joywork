@@ -2,6 +2,7 @@
   <div
     class="modelWindow"
     :class="[isOpen ? 'open' : '', openFullImage ? 'openFull' : '']"
+    ref="window"
   >
     <div class="modelWindow__content">
       <div class="modelWindow__head">
@@ -108,15 +109,18 @@
 <script setup lang="ts">
 import { DropdownPassThroughOptions } from "primevue/dropdown";
 import { PTOptions } from "primevue/ts-helpers";
-import { ref } from "vue";
+import { onMounted, ref, toRefs } from "vue";
 
-defineProps<{
+const props = defineProps<{
   isOpen: boolean;
 }>();
 const emits = defineEmits<{
   (e: "update:isOpen"): void;
 }>();
 
+const { isOpen } = toRefs(props);
+
+const window = ref<HTMLElement>();
 const openFullImage = ref<boolean>(false);
 const floors = ref(["10 этаж", "9 этаж", "7 этаж"]);
 const activeFloor = ref("10 этаж");
