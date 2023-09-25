@@ -562,6 +562,10 @@ export default function useViewFloors(areas: Area[], image: string) {
           fill: new Fill({
             color: olMap.value.hexToRgba("#4CAF50", 0.5),
           }),
+          stroke: new Stroke({
+            color: "#FF3838",
+            width: 2,
+          }),
         })
       );
 
