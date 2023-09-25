@@ -31,8 +31,7 @@ const { activeType } = storeToRefs(useComplexStore());
 
 <style scoped lang="scss">
 .listItems {
-  width: calc(100% + 60px);
-  transform: translateX(-30px);
+  width: 100%;
   height: max-content;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -45,12 +44,9 @@ const { activeType } = storeToRefs(useComplexStore());
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 28px;
-    padding: 0 35px;
-    padding-bottom: 30px;
   }
 
   @media screen and (max-width: 1600px) {
-    grid-template-columns: repeat(1, 1fr);
     &.listItems--tile {
       grid-template-columns: repeat(3, 1fr);
     }

@@ -36,12 +36,12 @@ const routes: Array<RouteRecordRaw> = [
         name: "viewHome",
         component: () => import("@/pages/HomePage/ViewHome.vue"),
       },
-      {
-        path: "planLayout",
-        name: "planLayoutPage",
-        component: () => import("@/pages/HomePage/PlanLayoutPage.vue"),
-      },
     ],
+  },
+  {
+    path: "/planLayout",
+    name: "planLayoutPage",
+    component: () => import("@/pages/HomePage/PlanLayoutPage.vue"),
   },
   {
     path: "/floors/:id",

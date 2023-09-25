@@ -1,9 +1,11 @@
 <template>
   <DefaultLayout>
     <div class="homePage relative bg-white flex justify-start items-start">
-      <RouterView v-slot="{ Component }">
-        <transition name="slide">
-          <component :is="Component" />
+      <RouterView v-slot="{ Component, route }">
+        <transition
+          :name="route.meta.animateName ? (route.meta.animateName as string) : 'slide'"
+        >
+          <component :is="Component" :key="route.path" />
         </transition>
       </RouterView>
     </div>

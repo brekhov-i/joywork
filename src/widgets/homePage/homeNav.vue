@@ -56,7 +56,7 @@
           <MyButton
             :theme="'grey-icon'"
             class="!w-max text-sm text-grey-900"
-            @click="router.push('/home/2409fjd/planLayout')"
+            @click="router.push('/planLayout')"
           >
             <svg
               width="18"
@@ -89,7 +89,7 @@
           <MyButton
             :theme="'grey-icon'"
             class="!w-max text-sm text-grey-900"
-            @click="router.push('/home/2409fjd/planLayout/#floors')"
+            @click="router.push('/planLayout/#floors')"
           >
             <svg
               width="18"

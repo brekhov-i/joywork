@@ -1,20 +1,23 @@
 <template>
-  <div class="defaultPage planLayoutPage">
-    <div class="titlePage planLayoutPage__title">
-      Тестовый ЖК Невский — Тестовый дом
+  <DefaultLayout>
+    <div class="defaultPage planLayoutPage bg-white h-full">
+      <div class="titlePage planLayoutPage__title">
+        Тестовый ЖК Невский — Тестовый дом
+      </div>
+      <TabView class="w-full" :active-index="activeIndex">
+        <TabPanel header="Планировка помещений">
+          <PlanRooms />
+        </TabPanel>
+        <TabPanel header="Планировка этажей">
+          <PlanFloors />
+        </TabPanel>
+      </TabView>
     </div>
-    <TabView class="w-full" :active-index="activeIndex">
-      <TabPanel header="Планировка помещений">
-        <PlanRooms />
-      </TabPanel>
-      <TabPanel header="Планировка этажей">
-        <PlanFloors />
-      </TabPanel>
-    </TabView>
-  </div>
+  </DefaultLayout>
 </template>
 
 <script setup lang="ts">
+import DefaultLayout from "@/shared/layouts/defaultLayout.vue";
 import PlanRooms from "@/widgets/homePage/planLayout/planRooms.vue";
 import PlanFloors from "@/widgets/homePage/planFloors/planFloors.vue";
 import { useRoute } from "vue-router";
@@ -36,6 +39,7 @@ onMounted(() => {
   justify-content: flex-start;
   align-items: flex-start;
   padding: 30px;
+  overflow-y: auto;
 }
 .titlePage {
   font-size: 32px;

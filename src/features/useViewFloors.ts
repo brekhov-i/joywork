@@ -44,6 +44,7 @@ type TOlMap = {
   hovered: boolean;
   zoomSliderWrapper: HTMLElement;
   popupWrapper: HTMLElement;
+  isMouseOverMap: boolean;
   onImageLoad: () => void;
   createMap: (imageElement: HTMLImageElement, target: string) => void;
   addInteractionsToMap: (map: Map, vector: VectorLayer<VectorSource>) => void;
@@ -262,6 +263,20 @@ export default function useViewFloors(areas: Area[], image: string) {
       );
       openWindowInfo.value = true;
       windowInfoData.value = {};
+    });
+
+    this.map.getViewport().addEventListener("mouseover", () => {
+      this.isMouseOverMap = true;
+    });
+
+    this.map.getViewport().addEventListener("mouseout", () => {
+      this.isMouseOverMap = false;
+    });
+
+    this.map.getViewport().addEventListener("wheel", (event) => {
+      if (!this.isMouseOverMap) {
+        event.preventDefault();
+      }
     });
 
     this.map.on("pointermove", function (this: Map, event) {
@@ -536,10 +551,6 @@ export default function useViewFloors(areas: Area[], image: string) {
   };
 
   function initFeatures() {
-    areas = localStorage.getItem("areas")
-      ? JSON.parse(localStorage.getItem("areas"))
-      : [];
-
     areas.forEach(function (item) {
       const feature = new Feature({
         geometry: new Polygon([item.points]),
@@ -569,7 +580,7 @@ export default function useViewFloors(areas: Area[], image: string) {
       .addEventListener("contextmenu", function (event) {
         event.preventDefault();
 
-        rightClickHandler(event);
+        // rightClickHandler(event);
       });
 
     // olMap.value.draw.interaction.on("change", function (event) {

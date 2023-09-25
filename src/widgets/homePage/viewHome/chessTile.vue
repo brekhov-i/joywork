@@ -34,7 +34,7 @@
               v-for="(apartament, apartamentIndex) in section.floors[index - 1]
                 ?.apartments"
               :key="`floor${index}apartament${apartamentIndex}`"
-              class="cell text-white rounded"
+              class="cell text-white rounded cursor-pointer"
               :class="[
                 apartament.status === StatusApartament.FREE
                   ? 'bg-green'

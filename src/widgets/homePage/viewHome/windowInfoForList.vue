@@ -151,11 +151,15 @@ const dropdownStyle = ref<PTOptions<DropdownPassThroughOptions>>({
   align-items: flex-start;
   visibility: hidden;
   transition: 0.5s all ease-in-out;
+  overflow: hidden;
+  opacity: 0;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
   &.open {
     visibility: visible;
     width: 750px;
     transition: 0.5s all ease-in-out;
+    opacity: 1;
   }
 
   &.openFull {
@@ -225,6 +229,8 @@ const dropdownStyle = ref<PTOptions<DropdownPassThroughOptions>>({
   }
 
   &__image {
+    width: 100%;
+    min-width: 500px;
     position: relative;
     margin-bottom: 30px;
 

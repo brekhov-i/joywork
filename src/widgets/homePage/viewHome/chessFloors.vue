@@ -7,9 +7,9 @@
       <div class="popup__square">153,6 м2 <span>- 56 450 руб./м2</span></div>
     </div>
   </Teleport>
-  <div class="chessFloors">
+  <div class="chessFloors relative">
     <div
-      class="chessFloors__head col-span-2 flex flex-row justify-start items-center"
+      class="chessFloors__head col-span-2 flex flex-row justify-start items-center sticky top-0 bg-white z-10"
     >
       <div class="chessFloors__title text-2xl mr-12">План 22 этажа</div>
       <MyButton
