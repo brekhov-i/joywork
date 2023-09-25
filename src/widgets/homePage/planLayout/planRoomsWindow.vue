@@ -403,7 +403,7 @@ const mouseDownHandlerContainer = (e: MouseEvent) => {
     if (selectionBox) {
       selectionBox.style.display = "none";
     }
-    if (selectedCandidate.value.length > 2) {
+    if (!isSelecting.value && selectedCandidate.value.length > 2) {
       openOverlay(e);
     }
     if (selectedCandidate.value.length === 1) {
@@ -432,8 +432,7 @@ function openOverlay(e: MouseEvent) {
   const overlay: HTMLElement = cellContainer.value.querySelector(".overlay");
   overlay.style.left = `${e.x}px`;
   overlay.style.top = `${e.y}px`;
-  overlay.style.opacity = "1";
-  overlay.style.visibility = "visible";
+  overlay.style.display = "flex";
 }
 
 function handleCellClick(event) {
@@ -464,8 +463,7 @@ function closeOverlay() {
   const overlay: HTMLElement = cellContainer.value.querySelector(".overlay");
   overlay.style.left = `${0}px`;
   overlay.style.top = `${0}px`;
-  overlay.style.opacity = "0";
-  overlay.style.visibility = "hidden";
+  overlay.style.display = "none";
 }
 
 function addCells() {
@@ -599,12 +597,9 @@ function isSelected(id: number): boolean {
         border-radius: 10px;
         border: 1px solid;
         @apply border-green;
-        opacity: 0;
-        visibility: hidden;
-        transition: 0.5s all ease-in-out;
         z-index: 2;
         background-color: #ffffff;
-        display: flex;
+        display: none;
         justify-content: flex-start;
         align-items: center;
         column-gap: 10px;
